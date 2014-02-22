@@ -1,0 +1,160 @@
+/* 	
+	Stylesheet for Diner Planner web-application, 
+	add only things bootstrap cannot provide 
+*/
+
+header
+{
+	padding-top:30px;
+	padding-bottom:20px;
+	background-color:rgba(255,255,255,0.8);
+	border-bottom:dotted thin #ccc;
+}
+
+body
+{
+	background:url(images/background.jpg) no-repeat;
+}
+
+h1
+{
+	
+	font-family:gabriela,Helvetica,Arial,sans-serif;
+}
+
+#landingView .row
+{
+	background-color:rgba(255,255,255,0.4);
+}
+
+#landingView #introBox
+{
+	background:rgba(250,245,240,1);
+	margin-top:100px;
+	margin-bottom:100px;
+	padding-bottom:20px;
+}
+
+#leftbox, #rightbox
+{
+	background:#fff;
+	min-height:400px;
+}
+
+#leftbox
+{
+	border-right:dotted thin #ccc;
+}
+
+#rightbox
+{
+	background:rgba(250,245,240,1);
+}
+
+#middlebox
+{
+	background:#fff;
+	border-bottom:dotted thin #ccc;
+}
+
+#middleTable
+{
+	margin-top:8px;
+	margin-bottom:8px;
+}
+
+.ui-state-default
+{
+	background:rgba(0,0,255,0.05);
+}
+
+.ui-state-hover
+{
+	background:rgba(0,255,0,0.1);
+}
+
+#minusGuests
+{
+	margin-right:14px;
+}
+
+#plusGuests
+{
+	margin-left:14px;
+}
+
+#menuTable
+{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+#menuTable h4
+{
+	padding:8px;
+	font-weight: bold;
+}
+
+figure
+{
+	padding: 9px;
+	width: 160px;
+	height: 174px;
+	border:thin solid #efefef;
+	background:#fff;
+	float: left;
+	margin-right:15px;
+	margin-top:15px;
+	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.05);
+	cursor:pointer;
+}
+
+.ui-draggable-helper
+{
+	
+	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.35);
+}
+
+figcaption
+{
+	text-align: center;
+}
+
+#searchInput
+{
+	margin-right:20px;
+}
+
+#category
+{
+	margin-left:20px;
+}
+
+.centertext
+{
+	text-align: center;
+}
+
+#backButton
+{
+	margin-top:13px;
+}
+.righttext
+{
+	text-align: right;
+}
+
+.overviewtable {
+    display:table;
+    width: 100%;
+}
+.overviewrow {
+    display:table-row;
+    width: 100%;
+    height: 80px;
+}
+
+.textbox {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
