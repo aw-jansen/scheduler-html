@@ -1,5 +1,7 @@
 $(function() {
 
+
+
 	if(window.location.href.indexOf("index.html") > -1) 
 	{
 		
@@ -18,6 +20,7 @@ $(function() {
 		   			break;
 
 		   		case "overView":
+		   			overView.updateFields();
 		   			$("#landingView, #inputFormView").hide();
 		   			$("#overView").show();
 		   			break;
@@ -33,6 +36,9 @@ $(function() {
 	
 	//We instantiate our model
 	var model = new Model();
+	var day = new Day();
+
+	    
 	
 	//And create the needed controllers and views
    	var landingView = new LandingView($("#landingView"),model);

@@ -57,7 +57,6 @@ var InputFormView = function (container,model) {
 	this.update = function(arg){
 
 		// update the overview
-		updateActivityList();
 		
 	}
 }

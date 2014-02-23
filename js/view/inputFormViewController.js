@@ -6,6 +6,7 @@ var InputFormViewController = function(view, model ) {
 	});
 
 	view.saveButton.click(function(){
+		createTestData()
 		window.stage("overView");
 	});
 

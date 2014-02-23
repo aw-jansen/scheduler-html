@@ -139,6 +139,10 @@ function Day(startH,startM) {
 		this.addActivity(activity, newposition);
 	};
 }
+// this is the instance of our main model
+// this is what you should use in your application
+var day = new Day();
+
 
 
 // this is our main module that contians days and praked activites
@@ -215,6 +219,9 @@ function Model(){
 	    listeners.push(listener);
 	};
 	//*** END OBSERVABLE PATTERN ***
+
+	
+	
 }
 
 // this is the instance of our main model
@@ -230,6 +237,7 @@ function createTestData(){
 	model.addActivity(new Activity("Working in groups",35,1,""),0);
 	model.addActivity(new Activity("Idea 1 discussion",15,2,""),0);
 	model.addActivity(new Activity("Coffee break",20,3,""),0);
+	model.addParkedActivity("Idea 1 discussion");
 	
 	console.log("Day Start: " + model.days[0].getStart());
 	console.log("Day End: " + model.days[0].getEnd());

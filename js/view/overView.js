@@ -5,8 +5,10 @@ var OverView = function (container,model) {
   	// and/or ones that responed to interaction)
 
 	function updateFields()
-	{
+	{	
 		updateActivityList();
+		updateParkedActivityList();
+		//alert("parked activities: "+model.parkedActivities.length);
 	}
 	
 	var div = $("<div class='row'>");
@@ -20,33 +22,38 @@ var OverView = function (container,model) {
 
 	*****************************************************/
 
-	var activityBox = $("<table id='activityTable' class='table'>");
+	var parkedActivityBox = $("<table id='activityTable' class='table'>");
 	var addActivityButton = $("<button class='btn btn-success'>");
 	var addActivityButtonContainer = $("<div>");
+	var numberOfParkedActivities = $("<p>");
+	var numberOfParkedActivitiesContainer = $("<div>");
 
 	addActivityButton.html("Add activity");
 	addActivityButtonContainer.append(addActivityButton);
 
-	activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
+	parkedActivityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
 
 
-	function updateActivityList()
-	{
-		$(activityBox).find("tr:gt(0)").remove();
+	function updateParkedActivityList()
+	{	
 	
+		$(parkedActivityBox).find("tr:gt(0)").remove();
+		alert("parked activities: "+model.parkedActivities.length);
 		for(i=0; i<model.parkedActivities.length; i++)
 		{
-			var activities = parkedActivities[i];
-
-			activityBox.append("<tr><td>"+parkedActivities[i]['name']+"</td><td>"+"test"+"</td></tr>");
+			parkedActivityBox.append("<tr><td>"+model.parkedActivities[i]+"</td><td>"+"test"+"</td></tr>");
 		}
 	}
-	updateActivityList();
+	updateParkedActivityList();
+
+	numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
+	//parkedActivityBox.append(numberOfParkedActivitiesContainer);
 
 	/*****************************************  
 	      Append items to left  
 	*****************************************/
-	left.append(activityBox);
+	left.append(parkedActivityBox);
+	left.append(numberOfParkedActivities);
 	left.append(addActivityButtonContainer);
 
 
@@ -69,12 +76,46 @@ var OverView = function (container,model) {
 				Creating the right box
 
 	*****************************************************/
+	var activityBox = $("<table id='activityTable' class='table'>");
+	activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
 
-	
+	var parkActivityButton = $("<button class='btn btn-success'>");
+	var parkActivityButtonContainer = $("<div>");
+	parkActivityButton.html("Park activity");
+	parkActivityButtonContainer.append(parkActivityButton);
+
+	var addDayButton = $("<button class='btn btn-success'>");
+	var addDayButtonContainer = $("<div>");
+	addDayButton.html("Add Day");
+	addDayButtonContainer.append(addDayButton);
+
+	function updateActivityList()
+	{	
+		$(activityBox).find("tr:gt(0)").remove();
+		alert("amount of days:"+model.days.length);
+
+		for(i=0; i<model.days.length; i++)
+		{
+			alert("paasei");
+			var day = $("<div>");
+
+			//for(j=0; j<4; j++)
+			
+				var activityName = model.days[0]._activities[0].getName();
+				var activityLength = model.days[0]._activities[0].getLength();
+			activityBox.append("<tr><td>"+activityName+"</td><td>"+activityLength+"</td></tr>");
+		
+		}
+	}
+	updateActivityList();
+
 	/*****************************************  
 	      Append items to right  
 	*****************************************/
-
+	right.append(activityBox);
+	right.append(parkActivityButtonContainer);
+	right.append(addDayButtonContainer);
+	
 
 
 	/*****************************************  
@@ -88,7 +129,9 @@ var OverView = function (container,model) {
 
 	container.append(div);
 
-
+	this.updateFields = updateFields;
+	this.parkActivityButton = parkActivityButton;
+	this.addDayButton = addDayButton;
 	this.addActivityButton = addActivityButton;
 	
 	/*****************************************  
@@ -104,6 +147,7 @@ var OverView = function (container,model) {
 
 		// update the overview
 		updateActivityList();
+		updateParkedActivityList();
 		
 	}
 }
