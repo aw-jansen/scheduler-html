@@ -43,10 +43,11 @@ var OverView = function (container,model) {
 		{
 			parkedActivityBox.append("<tr><td>"+model.parkedActivities[i].getName()+"</td><td>"+model.parkedActivities[i].getLength()+"</td></tr>");
 		}
+		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
 	}
 	updateParkedActivityList();
 
-	numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
+	
 
 	/*****************************************  
 	      Append items to left  

@@ -7,7 +7,8 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.parkActivityButton.click(function(){
-	model.addParkedActivity("ApenNeuken");
+		model.moveActivity(1, 1, null, 0) 
+		view.updateFields();
 	});
 
 	view.addDayButton.click(function(){
