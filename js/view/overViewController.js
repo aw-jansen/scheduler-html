@@ -3,6 +3,7 @@ var OverViewController = function(view, model ) {
 
 	view.addActivityButton.click(function(){
 		window.stage("inputFormView");
+		view.updateFields();
 	});
 
 	view.parkActivityButton.click(function(){
@@ -17,7 +18,7 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.addToScheduleButton.click(function(){
-		model.addActivity(new Activity("ApenNeuken",30,0,""),0); 
+		model.addActivity(new Activity("ApenNeuken",30,0,""),1); 
 		view.updateFields();
 		});
 
