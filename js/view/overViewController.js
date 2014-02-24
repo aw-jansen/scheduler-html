@@ -16,8 +16,10 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.addToScheduleButton.click(function(){
-		model.addActivity(new Activity("Introduction",10,0,""),0);
+		model.addActivity(new Activity("Introduction",10,0,""),0); 
 		view.updateFields();
 		});
+
+
 
 }

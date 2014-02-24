@@ -91,12 +91,14 @@ var OverView = function (container,model) {
 	function updateActivityList()
 	{	
 		dayOverview.empty();
-
 		for(i=0; i<model.days.length; i++)
 		{	
 			var dayBox = $("<div class='dayContainer'>");
 			var dayTitle = $("<h4>");
-			var dayStart = $("<p>");
+			var dayStartBox= $("<div>");
+			var dayStart = $("<input type='time' id='inputStartTime'>");
+
+			dayStart.attr('value',model.days[i].getStart());
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
 			var activityBox = $("<table id='activityTable' class='table'>");
@@ -108,21 +110,50 @@ var OverView = function (container,model) {
 				//	var activityLength = model.days[0]._activities[0].getLength();
 				activityBox.append("<tr><td>"+j+"</td><td>"+"test"+"</td></tr>");
 			}
-			dayTitle.html("Day "+i);
-			dayStart.html(model.days[i].getStart());
-			dayEnd.html(model.days[i].getEnd());
-			dayLength.html(day.getTotalLength());
+			strDate = dayStart.val();
+			arr = strDate.split(':');
+			hour = parseInt(arr[0]);
+			min = parseInt(arr[1]);
 
+			dayTitle.html("Day "+(i+1));
+			dayStartBox.html("Start time: ");
+			dayStartBox.append(dayStart);
+			dayEnd.html("Day end: "+model.days[i].getEnd());
+			dayLength.html("Total Length: ");
 			dayBox.append(dayTitle);
-			dayBox.append(dayStart);
+			dayBox.append(dayStartBox);
 			dayBox.append(dayEnd);
 			dayBox.append(dayLength);
 			dayBox.append(activityBox);
 			dayOverview.append(dayBox);
+
+			$("#inputStartTime").keyup(function() { 
+		    	alert($(this).val());
+		    	strDate = dayStart.val();
+				arr = strDate.split(':');
+				hour = parseInt(arr[0]);
+				min = parseInt(arr[1]);
+				model.days[i].setStart(hour,min);
+				
+			}); 
+
+			$("#inputStartTime").change(function() { 
+				alert($(this).val());  
+				strDate = dayStart.val();
+				arr = strDate.split(':');
+				hour = parseInt(arr[0]);
+				min = parseInt(arr[1]);
+				model.days[i].setStart(hour,min);
+			}); 
+
+
 		}
 		
 	}
 	updateActivityList();
+
+
+
 
 	/*****************************************  
 	      Append items to right  
