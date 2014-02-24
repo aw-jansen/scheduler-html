@@ -14,7 +14,7 @@ var InputFormViewController = function(view, model ) {
 		}
 		else
 		{
-			alert('Please fill out all the required fields.');
+			alert('Please fill out all the fields.');
 		}
 		
 	});

@@ -24,7 +24,7 @@ var InputFormView = function (container,model) {
 	var titleInput = $("<input type='textarea' id='titleInput' class='form-control' placeholder='Activity title'>");
 	
 	var timeInputContainer = $("<div class='form-group'>");
-	var timeInput = $("<input type='number' placeholder='Minute(s)' id='timeInput' class='form-control'>");
+	var timeInput = $("<input type='number' min='0' placeholder='Minute(s)' id='timeInput' class='form-control'>");
 	
 	var descriptionInputContainer = $("<div class='form-group'>");
 	var descriptionInput = $("<input type='textarea' class='form-control' id='descriptionInput' placeholder='Activity description'>");
