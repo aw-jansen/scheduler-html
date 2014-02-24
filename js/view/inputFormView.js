@@ -22,11 +22,11 @@ var InputFormView = function (container,model) {
 	var acitivityTypeDropDown = $("<select id='activityType' class='dropDown'>");
 	var inputTextBox = $("<div class='planningtable'>");
 	var inputTextInnerBox = $("<div>");
-	var titleInput = $("<input type='textarea' id='titleInput' placeholder='Activity title'class='inputTitle'>");
+	var titleInput = $("<input type='textarea' id='titleInput' class='inputTitle' placeholder='Activity title'>");
 	var titleInputContainer = $("<div class='planningRow'>");
 	var timeInput = $("<input type='number' id='timeInput'class='inputTime'>");
 	var timeInputContainer = $("<div class='planningRow'>");
-	var descriptionInput = $("<input type='textarea' placeholder='Activity description' id='descriptionInput' class='inputDescription'>");
+	var descriptionInput = $("<input type='textarea' id='descriptionInput' class='inputDescription'>  placeholder='Activity description'");
 	var descriptionInputContainer = $("<div class='planningRow'>");
 	
 	titleInputContainer.append(titleInput);

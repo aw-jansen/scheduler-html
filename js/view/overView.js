@@ -42,7 +42,7 @@ var OverView = function (container,model) {
 		
 		for(i=0; i<model.parkedActivities.length; i++)
 		{
-			parkedActivityBox.append("<tr><td>"+model.parkedActivities[i]+"</td><td>"+"test"+"</td></tr>");
+			parkedActivityBox.append("<tr><td>"+model.parkedActivities[i].getName()+"</td><td>"+model.parkedActivities[i].getLength()+"</td></tr>");
 		}
 	}
 	updateParkedActivityList();
@@ -86,32 +86,39 @@ var OverView = function (container,model) {
 	buttons.append(addToScheduleButtonContainer);
 	buttonsContainer.append(buttons);
 
+	
+
 	function updateActivityList()
 	{	
-		dayOverview.clear;
-		var dayTitle = $("<h3>");
-		var dayContainer = $("<div class='dayContainer'>");
-		var activityBox = $("<table id='activityTable' class='table'>");
+		dayOverview.empty();
 
-		activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
-
-		$(activityBox).find("tr:gt(0)").remove();
-		alert("amount of days:"+model.days.length);
 		for(i=0; i<model.days.length; i++)
-		{
-			var day = $("<div>");
+		{	
+			var dayBox = $("<div class='dayContainer'>");
+			var dayTitle = $("<h4>");
+			var dayStart = $("<p>");
+			var dayEnd = $("<p>");
+			var dayLength = $("<p>");
+			var activityBox = $("<table id='activityTable' class='table'>");
+			activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
 
-			alert("amount of activities:"+model.days[i].length);
-			for(j=0; j<model.days[i].length; j++)
+			for(j=0; j<model.days[i]._activities.length; j++)
 			{
-				var activityName = model.days[i]._activities[j].getName();
+				//var activityName = model.days[i]._activities[j].getName();
 				//	var activityLength = model.days[0]._activities[0].getLength();
-				activityBox.append("<tr><td>"+activityName+"</td><td>"+"test"+"</td></tr>");
+				activityBox.append("<tr><td>"+j+"</td><td>"+"test"+"</td></tr>");
 			}
-			dayTitle.html("Day"+i);
-			dayContainer.append(dayTitle);
-			dayContainer.append(activityBox);
-			dayOverview.append(dayContainer);
+			dayTitle.html("Day "+i);
+			dayStart.html(model.days[i].getStart());
+			dayEnd.html(model.days[i].getEnd());
+			dayLength.html(day.getTotalLength());
+
+			dayBox.append(dayTitle);
+			dayBox.append(dayStart);
+			dayBox.append(dayEnd);
+			dayBox.append(dayLength);
+			dayBox.append(activityBox);
+			dayOverview.append(dayBox);
 		}
 		
 	}
