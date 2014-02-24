@@ -10,5 +10,6 @@ var InputFormViewController = function(view, model ) {
 	model.addParkedActivity($('#titleInput').val());
 	//	model.addParkedActivity($("#category").find(":selected").text());
 		window.stage("overView");
+		
 	});
 }

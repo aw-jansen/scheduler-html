@@ -88,7 +88,7 @@ var OverView = function (container,model) {
 
 	function updateActivityList()
 	{	
-
+		dayOverview.clear;
 		var dayTitle = $("<h3>");
 		var dayContainer = $("<div class='dayContainer'>");
 		var activityBox = $("<table id='activityTable' class='table'>");
@@ -104,11 +104,11 @@ var OverView = function (container,model) {
 			alert("amount of activities:"+model.days[i].length);
 			for(j=0; j<model.days[i].length; j++)
 			{
-				var activityName = model.days[0]._activities[0].getName();
+				var activityName = model.days[i]._activities[j].getName();
 				//	var activityLength = model.days[0]._activities[0].getLength();
 				activityBox.append("<tr><td>"+activityName+"</td><td>"+"test"+"</td></tr>");
 			}
-			dayTitle.html("Day"+model.days.length);
+			dayTitle.html("Day"+i);
 			dayContainer.append(dayTitle);
 			dayContainer.append(activityBox);
 			dayOverview.append(dayContainer);

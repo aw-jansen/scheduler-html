@@ -5,6 +5,11 @@ var InputFormView = function (container,model) {
 	{	
 		updateInputFields();
 	}
+	/*
+  	$(function showDialog() {
+    $( "#dialog" ).dialog();
+  	});
+	*/
 
 	var div = $("<div class='row'>");
 	var left = $("<div id='inputFormBox' class='col-md-3'>");
@@ -58,7 +63,7 @@ var InputFormView = function (container,model) {
 	buttonsContainer.append(saveButtonContainer);
 
 	/*****************************************  
-	      Append items to right  
+	      Append items to left  
 	*****************************************/
 	left.append(inputTextBox);
 	left.append(buttonsContainer);
