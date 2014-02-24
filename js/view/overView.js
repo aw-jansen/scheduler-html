@@ -5,7 +5,6 @@ var OverView = function (container,model) {
   	// and/or ones that responed to interaction)
 	this.parkedActivityBox = container.find("#parkedActivityBox");
 	this.numberOfParkedActivities = container.find("#numberOfParkedActivities");
-	this.activityBox = container.find("#activityBox");
 
 	function updateFields()
 	{	
@@ -93,13 +92,13 @@ var OverView = function (container,model) {
 			var dayBox = $("<div class='dayContainer'>");
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
-
 			var dayStart = $("<input type='time' class='inputStartTime'>");
-
 			dayStart.attr('value',model.days[i].getStart());
 			dayStart.attr('id',[i]);
+
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
+
 			var activityBox = $("<table id='activityTable' class='table'>");
 			activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
 
@@ -118,7 +117,7 @@ var OverView = function (container,model) {
 			dayTitle.html("Day ");
 			dayStartBox.html("Start time: "+model.days[i].getStart());
 			dayStartBox.append(dayStart);
-			dayEnd.html("Day end: "+model.days[$(dayStart).attr('id')].getEnd());
+			dayEnd.html("Day end: "+model.days[i].getEnd());
 			dayLength.html("Total Length: ");
 
 			dayBox.append(dayTitle);
@@ -130,26 +129,24 @@ var OverView = function (container,model) {
 			dayOverview.append(dayBox);
 
 			$(dayStart).keyup(function() { 
-		    	strDate = dayStart.val();
+		    	strDate = $(this).val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
-				alert("aangeroepen i "+$(this).attr('id'));
 				model.days[$(this).attr('id')].setStart(hour,min);
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
+				updateActivityList()
 			}); 
 
 			$(dayStart).change(function() { 
-				strDate = dayStart.val();
+				strDate =  $(this).val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
-				alert("aangeroepen i "+$(this).attr('id'));
 				model.days[$(this).attr('id')].setStart(hour,min);
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
+				updateActivityList()
 			}); 
-
-
 		}
 		
 	}
@@ -194,7 +191,7 @@ var OverView = function (container,model) {
 		
 		// update the overview
 		updateParkedActivityList();
-		updateActivityList();
+		//updateActivityList();
 	}
 }
  

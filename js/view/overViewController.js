@@ -7,13 +7,11 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.parkActivityButton.click(function(){
-	model.addParkedActivity("Working in groups");
-	alert("working is parked")
+	model.addParkedActivity("ApenNeuken");
 	});
 
 	view.addDayButton.click(function(){
 		model.addDay();
-		alert("day is added!")
 		view.updateFields();
 	});
 
