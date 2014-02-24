@@ -11,12 +11,13 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.addDayButton.click(function(){
-	model.addDay();
-	alert("day is added!")
+		model.addDay();
+		alert("day is added!")
+		view.updateFields();
 	});
 
 	view.addToScheduleButton.click(function(){
-		model.addActivity(new Activity("Introduction",10,0,""),0); 
+		model.addActivity(new Activity("ApenNeuken",30,0,""),0); 
 		view.updateFields();
 		});
 

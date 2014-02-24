@@ -96,7 +96,7 @@ var OverView = function (container,model) {
 			var dayBox = $("<div class='dayContainer'>");
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
-			var dayStart = $("<input type='time' id='inputStartTime'>");
+			var dayStart = $("<input type='time' class='inputStartTime'>");
 
 			dayStart.attr('value',model.days[i].getStart());
 			var dayEnd = $("<p>");
@@ -106,10 +106,11 @@ var OverView = function (container,model) {
 
 			for(j=0; j<model.days[i]._activities.length; j++)
 			{
-				//var activityName = model.days[i]._activities[j].getName();
-				//	var activityLength = model.days[0]._activities[0].getLength();
-				activityBox.append("<tr><td>"+j+"</td><td>"+"test"+"</td></tr>");
+				var activityName = model.days[i]._activities[j].getName();
+				var activityLength = model.days[i]._activities[j].getLength();
+				activityBox.append("<tr><td>"+activityName+"</td><td>"+activityLength+"</td></tr>");
 			}
+			
 			strDate = dayStart.val();
 			arr = strDate.split(':');
 			hour = parseInt(arr[0]);
@@ -127,23 +128,24 @@ var OverView = function (container,model) {
 			dayBox.append(activityBox);
 			dayOverview.append(dayBox);
 
-			$("#inputStartTime").keyup(function() { 
+			$(".inputStartTime").keyup(function() { 
 		    	alert($(this).val());
 		    	strDate = dayStart.val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
 				model.days[i].setStart(hour,min);
-				
+				dayEnd.html("Day end: "+model.days[i].getEnd());
 			}); 
 
-			$("#inputStartTime").change(function() { 
+			$(".inputStartTime").change(function() { 
 				alert($(this).val());  
 				strDate = dayStart.val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
 				model.days[i].setStart(hour,min);
+				dayEnd.html("Day end: "+model.days[i].getEnd());
 			}); 
 
 
