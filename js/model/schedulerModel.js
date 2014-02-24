@@ -141,8 +141,6 @@ function Day(startH,startM) {
 }
 // this is the instance of our main model
 // this is what you should use in your application
-var day = new Day();
-
 
 
 // this is our main module that contians days and praked activites

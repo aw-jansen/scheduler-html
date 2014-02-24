@@ -45,6 +45,15 @@ h1
 {
 	background:#fff;
 	height:380px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left:-145px;
+	margin-top:-200px;
+	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.25);
+	width: 250px;
+	padding: 10px 20px;
+	z-index: 5;
 }
 
 
@@ -90,31 +99,6 @@ h1
 {
 	padding:8px;
 	font-weight: bold;
-}
-
-figure
-{
-	padding: 9px;
-	width: 160px;
-	height: 174px;
-	border:thin solid #efefef;
-	background:#fff;
-	float: left;
-	margin-right:15px;
-	margin-top:15px;
-	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.05);
-	cursor:pointer;
-}
-
-.ui-draggable-helper
-{
-	
-	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.35);
-}
-
-figcaption
-{
-	text-align: center;
 }
 
 .centertext
@@ -179,6 +163,17 @@ figcaption
 .dayOverview{
 	width:100%;
 	
+}
+
+#greyout
+{
+	position: absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	background:rgba(1,1,1,0.4);
+	z-index: 1
 }
 .row{
 	width:100%;

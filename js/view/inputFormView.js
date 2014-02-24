@@ -5,15 +5,9 @@ var InputFormView = function (container,model) {
 	{	
 		updateInputFields();
 	}
-	/*
-  	$(function showDialog() {
-    $( "#dialog" ).dialog();
-  	});
-	*/
 
-	var div = $("<div class='row'>");
-	var left = $("<div id='inputFormBox' class='col-md-3'>");
-
+	var div = $("<div id='inputFormBox'>");
+	var greyout = $("<div id='greyout'>");
 
 	/*****************************************************
 			Creating the activity creation box
@@ -63,18 +57,14 @@ var InputFormView = function (container,model) {
 	buttonsContainer.append(saveButtonContainer);
 
 	/*****************************************  
-	      Append items to left  
-	*****************************************/
-	left.append(inputTextBox);
-	left.append(buttonsContainer);
-
-	/*****************************************  
 	      Append all items to container
 	      Bind items
 
 	*****************************************/
-	div.append(left);
+	div.append(inputTextBox);
+	div.append(buttonsContainer);
 
+	container.append(greyout);
 	container.append(div);
 
 	this.updateFields = updateFields;
