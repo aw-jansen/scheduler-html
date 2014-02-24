@@ -7,34 +7,41 @@ var InputFormView = function (container,model) {
 	}
 
 	var div = $("<div id='inputFormBox'>");
+	var form = $("<form role='form'>");
 	var greyout = $("<div id='greyout'>");
 
 	/*****************************************************
 			Creating the activity creation box
 
 	*****************************************************/
-	var acitivityTypeDropDown = $("<select id='activityType' class='dropDown'>");
-	var inputTextBox = $("<div class='planningtable'>");
-	var inputTextInnerBox = $("<div>");
-	var titleInput = $("<input type='textarea' id='titleInput' class='inputTitle' placeholder='Activity title'>");
-	var titleInputContainer = $("<div class='planningRow'>");
-	var timeInput = $("<input type='number' id='timeInput'class='inputTime'>");
-	var timeInputContainer = $("<div class='planningRow'>");
-	var descriptionInput = $("<input type='textarea' id='descriptionInput' class='inputDescription'>  placeholder='Activity description'");
-	var descriptionInputContainer = $("<div class='planningRow'>");
 	
+	var acitivityTypeDropDownContainer = $("<div class='form-group'>");
+	var acitivityTypeDropDown = $("<select class='form-control' id='activityType'>");
+
+	acitivityTypeDropDown.append("<option>Presentation</option><option>Group Work</option><option>Discussion</option><option>Break</option>");
+
+	var titleInputContainer = $("<div class='form-group'>");
+	var titleInput = $("<input type='textarea' id='titleInput' class='form-control' placeholder='Activity title'>");
+	
+	var timeInputContainer = $("<div class='form-group'>");
+	var timeInput = $("<input type='number' placeholder='Minute(s)' id='timeInput' class='form-control'>");
+	
+	var descriptionInputContainer = $("<div class='form-group'>");
+	var descriptionInput = $("<input type='textarea' class='form-control' id='descriptionInput' placeholder='Activity description'>");
+	
+	acitivityTypeDropDownContainer.append(acitivityTypeDropDown);
 	titleInputContainer.append(titleInput);
+
 	timeInputContainer.append(timeInput);
-	timeInputContainer.append(" min");
+	
 	descriptionInputContainer.append(descriptionInput);
 
-	inputTextBox.html('<h3>Create New Activity</h3>');
-	acitivityTypeDropDown.append("<option>Presentation</option><option>Group Work</option><option>Discussion</option><option>Break</option>");
-	inputTextInnerBox.append(titleInputContainer);
-	inputTextInnerBox.append(timeInputContainer);
-	inputTextInnerBox.append(acitivityTypeDropDown);
-	inputTextInnerBox.append(descriptionInputContainer);
-	inputTextBox.append(inputTextInnerBox);
+	form.html('<h3>Create New Activity</h3>');
+	
+	form.append(titleInputContainer);
+	form.append(timeInputContainer);
+	form.append(acitivityTypeDropDownContainer);
+	form.append(descriptionInputContainer);
 
 	function updateInputFields()
 	{
@@ -44,24 +51,22 @@ var InputFormView = function (container,model) {
 	}
 
 	var cancelButton = $("<button class='btn btn-danger'>");
-	var cancelButtonContainer = $("<div class='floatleft'>");
-	var saveButton = $("<button class='btn btn-success'>");
-	var saveButtonContainer = $("<div class='floatleft'>");
-	var buttonsContainer = $("<div>");
+	var saveButton = $("<button style='float:right' class='btn btn-success'>");
+	var buttonsContainer = $("<div class='form-group'>");
 
 	saveButton.html("Save");
-	saveButtonContainer.append(saveButton);
 	cancelButton.html("Cancel");
-	cancelButtonContainer.append(cancelButton);
-	buttonsContainer.append(cancelButtonContainer);
-	buttonsContainer.append(saveButtonContainer);
+	buttonsContainer.append(saveButton);
+	buttonsContainer.append(cancelButton);
+	form.append(buttonsContainer);
+
 
 	/*****************************************  
 	      Append all items to container
 	      Bind items
 
 	*****************************************/
-	div.append(inputTextBox);
+	div.append(form);
 	div.append(buttonsContainer);
 
 	container.append(greyout);

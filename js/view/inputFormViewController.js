@@ -6,9 +6,16 @@ var InputFormViewController = function(view, model ) {
 	});
 
 	view.saveButton.click(function(){
-		var act = new Activity($('#titleInput').val(),$('#timeInput').val(),$("#activityType").find(":selected").val(),"Some description");
-		model.addParkedActivity(act);
-		window.stage("overView");
+
+		if( ($('#titleInput').val()!= "") && ($('#timeInput').val()!= "") && ($("#descriptionInput").val()!="") )
+		{
+			model.addParkedActivity(new Activity($('#titleInput').val(),$('#timeInput').val(),$("#activityType").find(":selected").val(),$("#descriptionInput").val()));
+			window.stage("overView");
+		}
+		else
+		{
+			alert('Please fill out all the required fields.');
+		}
 		
 	});
 }
