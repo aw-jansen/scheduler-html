@@ -27,8 +27,11 @@ $(function() {
 
 		   		case "inputFormView":
 		   			inputFormView.updateFields();
-		   			$("#landingView, #overView").hide();
-		   			$("#inputFormView").show();
+		   			var strWindowFeatures = "location=yes,height=400,width=300,scrollbars=yes,status=yes";
+					var URL = "inputForm.html";
+					var win = window.open(URL, "_blank", strWindowFeatures);
+		   			//$("#landingView, #overView").hide();
+		   			//$("#inputFormView").show();
 		   			break;
 
 	   		}

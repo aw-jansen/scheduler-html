@@ -41,6 +41,13 @@ h1
 	min-height:400px;
 }
 
+#inputFormBox
+{
+	background:#fff;
+	height:380px;
+}
+
+
 #leftbox
 {
 	border-right:dotted thin #ccc;

@@ -7,9 +7,7 @@ var InputFormView = function (container,model) {
 	}
 
 	var div = $("<div class='row'>");
-	var left = $("<div id='leftbox' class='col-md-3'>");
-	var right = $("<div id='rightbox' class='col-md-9'>");
-	var middle = $("<div id='middlebox' class='col-md-12'>");
+	var left = $("<div id='inputFormBox' class='col-md-3'>");
 
 
 	/*****************************************************
@@ -62,17 +60,15 @@ var InputFormView = function (container,model) {
 	/*****************************************  
 	      Append items to right  
 	*****************************************/
-	right.append(inputTextBox);
-	right.append(buttonsContainer);
+	left.append(inputTextBox);
+	left.append(buttonsContainer);
 
 	/*****************************************  
 	      Append all items to container
 	      Bind items
 
 	*****************************************/
-	div.append(middle);
 	div.append(left);
-	div.append(right);
 
 	container.append(div);
 
