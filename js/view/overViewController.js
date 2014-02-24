@@ -12,8 +12,12 @@ var OverViewController = function(view, model ) {
 
 	view.addDayButton.click(function(){
 	model.addDay();
-	 createTestData();
 	alert("day is added!")
+	});
+
+	view.addToScheduleButton.click(function(){
+		model.addActivity(0,0,0);
+		view.updateFields();
 	});
 
 }

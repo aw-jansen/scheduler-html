@@ -228,7 +228,7 @@ function Model(){
 // this is what you should use in your application
 var model = new Model();
 
-
+//createTestData();
 // you can use this method to create some test data and test your implementation
 function createTestData(){
 	model.addDay();

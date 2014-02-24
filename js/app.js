@@ -26,6 +26,7 @@ $(function() {
 		   			break;
 
 		   		case "inputFormView":
+		   			inputFormView.updateFields();
 		   			$("#landingView, #overView").hide();
 		   			$("#inputFormView").show();
 		   			break;
@@ -38,7 +39,7 @@ $(function() {
 	var model = new Model();
 	var day = new Day();
 
-	    
+	    //createTestData();
 	
 	//And create the needed controllers and views
    	var landingView = new LandingView($("#landingView"),model);

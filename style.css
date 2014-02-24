@@ -73,16 +73,6 @@ h1
 	background:rgba(0,255,0,0.1);
 }
 
-#minusGuests
-{
-	margin-right:14px;
-}
-
-#plusGuests
-{
-	margin-left:14px;
-}
-
 #menuTable
 {
 	margin-top:20px;
@@ -120,41 +110,76 @@ figcaption
 	text-align: center;
 }
 
-#searchInput
-{
-	margin-right:20px;
-}
-
-#category
-{
-	margin-left:20px;
-}
-
 .centertext
 {
 	text-align: center;
 }
 
-#backButton
-{
-	margin-top:13px;
-}
 .righttext
 {
 	text-align: right;
 }
 
-.overviewtable {
+.planningtable {
     display:table;
     width: 100%;
 }
-.overviewrow {
-    display:table-row;
+.planningRow {
+    display:table;
     width: 100%;
-    height: 80px;
+}
+
+.inputTitle {
+    margin-top: 20px;
+    width:200px;
+    height: 20px;
+}
+.inputTime {
+    margin-top: 20px;
+    width:50px;
+    height: 20px;
+}
+
+.dropDown {
+	margin-top: 20px;
+	width:200px;
+}
+
+.inputDescription {
+	margin-top: 20px;
+	width:200px;
+    height: 100px;
+   text-align: left;
+    word-break: normal;
 }
 
 .textbox {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.floatleft {
+	margin-top: 20px;
+	margin-right: 20px;
+	float:left;
+}
+
+.dayContainer{
+	width:250px;
+	float:left;
+}
+
+.dayOverview{
+	width:100%;
+	
+}
+.row{
+	width:100%;
+	float:left;
+	padding-top: 10px;
+}
+
+.buttonContainer{
+	float:left;
+	padding-left: 10px;
 }

@@ -6,8 +6,9 @@ var InputFormViewController = function(view, model ) {
 	});
 
 	view.saveButton.click(function(){
-		createTestData()
+	var act = new Activity($('#titleInput').val(),$('#timeInput').val(),$("#activityType").find(":selected").val(),"Some description");
+	model.addParkedActivity($('#titleInput').val());
+	//	model.addParkedActivity($("#category").find(":selected").text());
 		window.stage("overView");
 	});
-
 }
