@@ -40,7 +40,7 @@ var OverView = function (container,model) {
 			var parkedActivityDurationbox = $("<div class='activityDurationBox'>");
 			var parkedActivityNamebox = $("<div class='activityNameBox'>");
 			var closeSymbol =$("<div class='activityCloseBox'>");
-			closeSymbol.append("<img src='images/wastebin.png'>")
+			closeSymbol.append("<img src='images/close.png'>")
 			closeSymbol.attr('value',[i]);
 			
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
