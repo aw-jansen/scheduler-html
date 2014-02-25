@@ -4,7 +4,7 @@ var OverView = function (container,model) {
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
 
-	model.addDay();
+	
 	function updateFields()
 	{	
 		updateActivityList();
@@ -23,7 +23,7 @@ var OverView = function (container,model) {
 	*****************************************************/
 
 	var parkedActivityBox = $("<div class='parkedActivityBox'>");
-	var addActivityButton = $("<button class='btn btn-success'  style='width:100%; margin-top:5px;'>");
+	var addActivityButton = $("<button class='btn btn-success'  style='width:100%; margin-top:10px;'>");
 	var addActivityButtonContainer = $("<div id='addActivityButton'>");
 	var numberOfParkedActivities = $("<p>");
 	var numberOfParkedActivitiesContainer = $("<div>");
@@ -177,7 +177,6 @@ var OverView = function (container,model) {
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
 				updateActivityList()
 			}); 
-				this.dayStart = dayStart;
 		}
 		
 	}
@@ -202,6 +201,7 @@ var OverView = function (container,model) {
 	      Bind items
 
 	*****************************************/
+
 	div.append(middle);
 	div.append(left);
 	div.append(right);
@@ -229,5 +229,9 @@ var OverView = function (container,model) {
 		// update the overview
 
 	}
+	model.addDay();
+	updateActivityList();
 }
+
+
  

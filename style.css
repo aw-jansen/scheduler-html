@@ -38,9 +38,9 @@ h1
 #leftbox, #rightbox
 {
 	background:#fff;
-	min-height:400px;
+	min-height:525px;
 	min-width:50px;
-	max-height: 500px;
+	max-height: 600px;
 }
 #rightbox{
 
@@ -134,6 +134,7 @@ h1
 	padding-top: 5px;
 	padding-left:5px;
 	padding-right: 5px;
+	margin-top:10px;
 	margin-right: 10px;
 	float:left;
 	border-width:2px;
@@ -211,7 +212,7 @@ h1
 }
 
 .parkedActivityBox{
-	margin-top: 5px;
+	margin-top: 10px;
 	height: 355px;
 	overflow: auto;
   	border-width:1px;

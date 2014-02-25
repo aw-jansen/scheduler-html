@@ -7,7 +7,7 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.parkActivityButton.click(function(){
-		model.moveActivity(1, 1, null, 0) 
+		model.moveActivity(1, 0, null, 0) 
 		view.updateFields();
 	});
 
@@ -17,7 +17,7 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.addToScheduleButton.click(function(){
-		model.addActivity(new Activity("ApenNeuken",30,1,""),1); 
+		model.addActivity(new Activity("LikkendeAnusBal xD",45,1,""),1); 
 		view.updateActivityList();
 		});
 
