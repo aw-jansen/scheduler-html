@@ -7,7 +7,7 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.parkActivityButton.click(function(){
-		model.moveActivity(1, 0, null, 0) 
+		model.moveActivity(1, 0, 0, 0) 
 		view.updateFields();
 	});
 

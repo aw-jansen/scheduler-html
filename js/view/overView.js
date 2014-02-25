@@ -45,7 +45,7 @@ var OverView = function (container,model) {
 
 			switch(model.parkedActivities[i].getType())
 	   		{
-		   		case "Presentation":parkedActivityNamebox.attr("style", "background:#EFC94C"); break;
+		   		case "Presentation":parkedActivityNamebox.css("background", "#EFC94C"); break;
 	   			case "Group Work":	parkedActivityNamebox.attr("style", "background:#E27A3F"); break;
 	   			case "Discussion":	parkedActivityNamebox.attr("style", "background:#DF5A49"); break;
 	   			case "Break":		parkedActivityNamebox.attr("style", "background:#45B29D"); break;
@@ -53,6 +53,16 @@ var OverView = function (container,model) {
 			parkedActivityContainer.append(parkedActivityDurationbox);
 			parkedActivityContainer.append(parkedActivityNamebox);
 			parkedActivityBox.append(parkedActivityContainer);
+
+			// Making the stuff draggable
+			$(parkedActivityContainer).draggable(
+			{
+				appendTo:"body",
+				helper:"clone",
+		
+			});
+
+
 		}
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
 	}
@@ -143,7 +153,15 @@ var OverView = function (container,model) {
 
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
-				activityBox.append(activityContainer);		
+				activityBox.append(activityContainer);	
+
+				// Making the stuff draggable
+				$(activityContainer).draggable(
+				{
+					appendTo:"body",
+					helper:"clone",
+			
+				});	
 			}
 
 			/*****************************************  

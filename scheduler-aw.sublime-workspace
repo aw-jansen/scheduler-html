@@ -1,0 +1,320 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"padding",
+				"padding-right"
+			],
+			[
+				"Mar",
+				"margin-left"
+			],
+			[
+				"te",
+				"text-indent"
+			],
+			[
+				"dish",
+				"dishOverview"
+			],
+			[
+				"Dish",
+				"dishName"
+			],
+			[
+				"backto",
+				"backtoSelectContainer"
+			],
+			[
+				"update",
+				"updateFields"
+			],
+			[
+				"pad",
+				"padding-right"
+			],
+			[
+				"in",
+				"ingredients"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "js/view/overViewController.js",
+			"settings":
+			{
+				"buffer_size": 545,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/view/inputFormViewController.js",
+			"settings":
+			{
+				"buffer_size": 583,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "//OverView Object constructor\nvar OverView = function (container,model) {\n	\n	// Get all the relevant elements of the view (ones that show data\n  	// and/or ones that responed to interaction)\n\n	\n	function updateFields()\n	{	\n		updateActivityList();\n		updateParkedActivityList();\n	}\n	\n	var div = $(\"<div class='row'>\");\n	var left = $(\"<div id='leftbox' class='col-md-3'>\");\n	var right = $(\"<div id='rightbox' class='col-md-9'>\");\n	var middle = $(\"<div id='middlebox' class='col-md-12'>\");\n\n	/*****************************************************\n\n				Creating Left menu\n\n	*****************************************************/\n\n	var parkedActivityBox = $(\"<div class='parkedActivityBox'>\");\n	var addActivityButton = $(\"<button class='btn btn-success'  style='width:100%; margin-top:10px;'>\");\n	var addActivityButtonContainer = $(\"<div id='addActivityButton'>\");\n	var numberOfParkedActivities = $(\"<p>\");\n	var numberOfParkedActivitiesContainer = $(\"<div>\");\n\n	addActivityButton.html(\"Add activity\");\n	addActivityButtonContainer.append(addActivityButton);\n\n	function updateParkedActivityList()\n	{	parkedActivityBox.empty();\n		\n		for(i=0; i<model.parkedActivities.length; i++)\n		{	\n			var parkedActivityContainer = $(\"<div class='activityTile'>\");\n			var parkedActivityNamebox = $(\"<div class='activityTilePart1'>\");\n			var parkedActivityDurationbox = $(\"<div class='activityTilePart2'>\");\n			\n			parkedActivityNamebox.append(model.parkedActivities[i].getName());\n			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ \" min\");\n\n			switch(model.parkedActivities[i].getType())\n	   		{\n		   		case \"Presentation\":parkedActivityNamebox.css(\"background\", \"#EFC94C\"); 		break;\n	   			case \"Group Work\":	parkedActivityNamebox.attr(\"style\", \"background:#E27A3F\"); 	break;\n	   			case \"Discussion\":	parkedActivityNamebox.attr(\"style\", \"background:#DF5A49\"); 	break;\n	   			case \"Break\":		parkedActivityNamebox.attr(\"style\", \"background:#45B29D\"); 	break;\n		   	}\n			parkedActivityContainer.append(parkedActivityDurationbox);\n			parkedActivityContainer.append(parkedActivityNamebox);\n			parkedActivityBox.append(parkedActivityContainer);\n\n			// Making the stuff draggable\n			$(activityTitle).draggable(\n			{\n				appendTo:\"body\",\n				helper:\"clone\",\n		\n			});\n		}\n		numberOfParkedActivities.html(\"Number of parked activities: \"+model.parkedActivities.length);\n	}\n	updateParkedActivityList();\n\n	// Temporary buttons for testing only --> check controller for function\n	var addToScheduleButtonContainer = $(\"<div class='buttonContainer'>\");\n	var addToScheduleButton = $(\"<button class='btn btn-success'>\");\n	addToScheduleButton.html(\"Add Test Activity to Schedule\");\n	addToScheduleButtonContainer.append(addToScheduleButton);\n\n	var testButtonsContainer = $(\"<div class='row'>\");\n	var parkActivityButton = $(\"<button class='btn btn-success'>\");\n	var parkActivityButtonContainer = $(\"<div class='buttonContainer'>\");\n	parkActivityButton.html(\"Park Test activity\");\n	parkActivityButtonContainer.append(parkActivityButton);\n\n	testButtonsContainer.append(addToScheduleButtonContainer);\n	testButtonsContainer.append(parkActivityButtonContainer);\n\n	\n	/*****************************************  \n	      		Append items to left  \n	*****************************************/\n	left.append(addActivityButtonContainer);\n	left.append(parkedActivityBox);\n	left.append(numberOfParkedActivities);\n	left.append(testButtonsContainer);\n	\n	\n	/*****************************************************\n\n				Creating the right box\n\n	*****************************************************/\n	\n	//Add Day Overview\n	var dayOverview  = $(\"<div class='dayOverview'>\");\n\n	function updateActivityList()\n	{	\n		dayOverview.empty();\n\n		// Loops trhough all days\n		for(i=0; i<model.days.length; i++)\n		{	\n\n			var dayBox = $(\"<div class='dayContainer'>\");\n			var dayTitle = $(\"<h4>\");\n			var dayStartBox= $(\"<div>\");\n			var dayStart = $(\"<input type='time' class='inputStartTime'>\");\n				dayStart.attr('value',model.days[i].getStart());\n				dayStart.attr('id',[i]);\n			var dayEnd = $(\"<p>\");\n			var dayLength = $(\"<p>\");\n			\n			strDate = dayStart.val();\n			arr = strDate.split(':');\n			hour = parseInt(arr[0]);\n			min = parseInt(arr[1]);\n\n			dayTitle.html(\"Day \"+(1+i));\n			dayStartBox.html(\"Start time \");\n			dayStartBox.append(dayStart);\n			dayEnd.html(\"Day end: \"+model.days[i].getEnd());\n			dayLength.html(\"Total Length: \"+model.days[i].getTotalLength()+\" min\");\n\n			var activityBox = $(\"<div class='activityBox'>\");\n			activityBox.empty();\n\n			// Loops trhough all activities in each day\n			for(j=0; j<model.days[i]._activities.length; j++)\n			{\n\n				var activityContainer = $(\"<div class='activityTile'>\");\n				var activityNamebox = $(\"<div class='activityTilePart1'>\");\n				var activityDurationbox = $(\"<div class='activityTilePart2'>\");\n				\n				switch(model.days[i]._activities[j].getType())\n		   		{\n			   		case \"Presentation\"	:activityNamebox.attr(\"style\", \"background:#EFC94C\");break;\n		   			case \"Group Work\"	:activityNamebox.attr(\"style\", \"background:#E27A3F\");break;\n		   			case \"Discussion\"	:activityNamebox.attr(\"style\", \"background:#DF5A49\");break;\n		   			case \"Break\"		:activityNamebox.attr(\"style\", \"background:#45B29D\");break;\n				}\n				activityNamebox.append(model.days[i]._activities[j].getName());\n				activityDurationbox.html(model.days[i]._activities[j].getLength()+ \" min\");\n\n				activityContainer.append(activityDurationbox);\n				activityContainer.append(activityNamebox);\n				activityBox.append(activityContainer);		\n			}\n\n			/*****************************************  \n	      			Append items to dayBox  \n			*****************************************/\n\n			dayBox.append(dayTitle);\n			dayBox.append(dayStartBox);\n			dayBox.append(dayEnd);\n			dayBox.append(dayLength);\n			dayBox.append(activityBox);\n			dayOverview.append(dayBox);\n\n			//Listens for changes in StartTime for each day\n			$(\".inputStartTime\").keyup(function() { \n		    	strDate = $(this).val();\n				arr = strDate.split(':');\n				hour = parseInt(arr[0]);\n				min = parseInt(arr[1]);\n				model.days[$(this).attr('id')].setStart(hour,min);\n				dayEnd.html(\"Day end: \"+model.days[$(this).attr('id')].getEnd());\n				updateActivityList()\n			}); \n\n			$(\".inputStartTime\").change(function() { \n				strDate =  $(this).val();\n				arr = strDate.split(':');\n				hour = parseInt(arr[0]);\n				min = parseInt(arr[1]);\n				model.days[$(this).attr('id')].setStart(hour,min);\n				dayEnd.html(\"Day end: \"+model.days[$(this).attr('id')].getEnd());\n				updateActivityList()\n			}); \n		}\n		\n	}\n	updateActivityList();\n\n	// Add Day button\n	var addDayButton = $(\"<button class='btn btn-success'>\");\n	var addDayButtonContainer = $(\"<div class='addDayButtonContainer'>\");\n	addDayButton.html(\"Add Day\");\n\n	addDayButtonContainer.append(addDayButton);\n	\n\n	/*****************************************  \n	      Append items to right  \n	*****************************************/\n	right.append(dayOverview);\n	right.append(addDayButtonContainer);\n\n	/*****************************************  \n	      Append all items to container\n	      Bind items\n\n	*****************************************/\n\n	div.append(middle);\n	div.append(left);\n	div.append(right);\n\n	container.append(div);\n	this.updateParkedActivityList = updateParkedActivityList;\n	this.updateActivityList = updateActivityList;\n	this.updateFields = updateFields;\n	this.parkActivityButton = parkActivityButton;\n	this.addDayButton = addDayButton;\n	this.addActivityButton = addActivityButton;\n	this.addToScheduleButton = addToScheduleButton;\n	\n	/*****************************************  \n	      Observer implementation    \n\n	*****************************************/\n	\n	//Register an observer to the model\n	model.addObserver(this);\n	\n	//This function gets called when there is a change at the model\n	this.update = function(arg){\n		\n		// update the overview\n\n	}\n	model.addDay();\n	updateActivityList();\n}\n\n\n \n",
+			"file": "js/view/overView.js",
+			"file_size": 8122,
+			"file_write_time": 130378243923651499,
+			"settings":
+			{
+				"buffer_size": 7882,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 311.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Documents/GitHub/scheduler-html/js/model/schedulerModel.js",
+		"/D/Documents/GitHub/scheduler-html/js/view/inputFormView.js",
+		"/D/Documents/GitHub/scheduler-html/index.html",
+		"/D/Documents/GitHub/scheduler-html/inputForm.html",
+		"/D/Documents/GitHub/scheduler-html/landingView.html",
+		"/D/Documents/GitHub/scheduler-html/overView.html",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/dishViewController.js",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/selectionViewController.js",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/selectionView.js",
+		"/D/Documents/GitHub/dinnerplanner-html/dishView.html",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/dishView.js",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/overView.js",
+		"/D/Documents/GitHub/dinnerplanner-html/style.css",
+		"/D/Documents/GitHub/dinnerplanner-html/js/view/preparationViewController.js",
+		"/D/Documents/GitHub/dinnerplanner-html/js/app.js",
+		"/D/Documents/GitHub/dinnerplanner-html/js/model/dinnerModel.js",
+		"/D/Documents/GitHub/dinnerplanner-html/selectionView.html",
+		"/C/Users/Wouter/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/Wouter/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"park",
+			"cent",
+			"solid",
+			"table",
+			"buttonContainer",
+			"DinnerModel",
+			"this.bac",
+			"dishid"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "js/view/overViewController.js",
+					"settings":
+					{
+						"buffer_size": 545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								268,
+								268
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/view/inputFormViewController.js",
+					"settings":
+					{
+						"buffer_size": 583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								513,
+								513
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/view/overView.js",
+					"settings":
+					{
+						"buffer_size": 7882,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5821,
+								5821
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2907.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 270.0,
+	"status_bar_visible": true
+}
