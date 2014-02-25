@@ -176,8 +176,12 @@ h1
 	margin-bottom: 1px;
 
 }
-
 .activityTilePart1{
+	float:left;
+	text-indent: 5px;
+}
+
+.activityTilePart2{
 
 	float:right;
 	color: #FFF;
@@ -189,9 +193,8 @@ h1
   	border-color:#404040;
 }
 
-.activityTilePart2{
-	float:left;
-	text-indent: 5px;
+.activityTilePart3{
+	float:right;
 }
 
 .addDayButtonContainer{

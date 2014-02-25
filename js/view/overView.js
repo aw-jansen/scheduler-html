@@ -37,11 +37,15 @@ var OverView = function (container,model) {
 		for(i=0; i<model.parkedActivities.length; i++)
 		{	
 			var parkedActivityContainer = $("<div class='activityTile'>");
-			var parkedActivityNamebox = $("<div class='activityTilePart1'>");
-			var parkedActivityDurationbox = $("<div class='activityTilePart2'>");
+			var parkedActivityDurationbox = $("<div class='activityTilePart1'>");
+			var parkedActivityNamebox = $("<div class='activityTilePart2'>");
+			var closeSymbol =$("<div class='activityTilePart3'>");
+			closeSymbol.html("X");
+			closeSymbol.attr('value',[i]);
 			
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
 			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
+			parkedActivityContainer.append(closeSymbol);
 
 			switch(model.parkedActivities[i].getType())
 	   		{
@@ -50,7 +54,8 @@ var OverView = function (container,model) {
 	   			case "Discussion":	parkedActivityNamebox.attr("style", "background:#DF5A49"); break;
 	   			case "Break":		parkedActivityNamebox.attr("style", "background:#45B29D"); break;
 		   	}
-			parkedActivityContainer.append(parkedActivityDurationbox);
+
+		   	parkedActivityContainer.append(parkedActivityDurationbox);
 			parkedActivityContainer.append(parkedActivityNamebox);
 			parkedActivityBox.append(parkedActivityContainer);
 
@@ -61,6 +66,15 @@ var OverView = function (container,model) {
 				helper:"clone",
 		
 			});
+
+			//Listens for changes in StartTime for each day
+			closeSymbol.click(function() { 
+		    	removeID = $(this).val();
+				
+				model.removeParkedActivity(removeID);
+				updateParkedActivityList()
+			}); 
+
 
 
 		}
@@ -138,9 +152,9 @@ var OverView = function (container,model) {
 			{
 
 				var activityContainer = $("<div class='activityTile'>");
-				var activityNamebox = $("<div class='activityTilePart1'>");
-				var activityDurationbox = $("<div class='activityTilePart2'>");
-				
+				var activityDurationbox = $("<div class='activityTilePart1'>");
+				var activityNamebox = $("<div class='activityTilePart2'>");
+
 				switch(model.days[i]._activities[j].getType())
 		   		{
 			   		case "Presentation"	:activityNamebox.attr("style", "background:#EFC94C");break;
