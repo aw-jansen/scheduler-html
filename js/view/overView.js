@@ -22,7 +22,7 @@ var OverView = function (container,model) {
 
 	*****************************************************/
 
-	var parkedActivityBox = $("<div class='parkedActivityBox'>");
+	var parkedActivityBox = $("<div class='parkedActivityBox' id='parkedActivityBox'>");
 	var addActivityButton = $("<button class='btn btn-success'  style='width:100%; margin-top:10px;'>");
 	var addActivityButtonContainer = $("<div id='addActivityButton'>");
 	var numberOfParkedActivities = $("<p>");
@@ -36,16 +36,17 @@ var OverView = function (container,model) {
 		
 		for(i=0; i<model.parkedActivities.length; i++)
 		{	
-			var parkedActivityContainer = $("<div class='activityTile'>");
-			var parkedActivityDurationbox = $("<div class='activityTilePart1'>");
-			var parkedActivityNamebox = $("<div class='activityTilePart2'>");
-			var closeSymbol =$("<div class='activityTilePart3'>");
+			var parkedActivityContainer = $("<div class='activityContainer'>");
+			var parkedActivityDurationbox = $("<div class='activityDurationBox'>");
+			var parkedActivityNamebox = $("<div class='activityNameBox'>");
+			var closeSymbol =$("<div class='activityCloseBox'>");
 			closeSymbol.html("X");
 			closeSymbol.attr('value',[i]);
 			
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
 			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
-			parkedActivityContainer.append(closeSymbol);
+			parkedActivityNamebox.append(closeSymbol);
+
 
 			switch(model.parkedActivities[i].getType())
 	   		{
@@ -151,9 +152,9 @@ var OverView = function (container,model) {
 			for(j=0; j<model.days[i]._activities.length; j++)
 			{
 
-				var activityContainer = $("<div class='activityTile'>");
-				var activityDurationbox = $("<div class='activityTilePart1'>");
-				var activityNamebox = $("<div class='activityTilePart2'>");
+				var activityContainer = $("<div class='activityContainer'>");
+				var activityDurationbox = $("<div class='activityDurationBox'>");
+				var activityNamebox = $("<div class='activityNameBox'>");
 
 				switch(model.days[i]._activities[j].getType())
 		   		{

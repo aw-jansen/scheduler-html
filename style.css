@@ -169,19 +169,21 @@ h1
 	padding-left: 10px;
 }
 
-.activityTile{
+.activityContainer{
 	width:235px;
 	height:30px;
 	float: right;
 	margin-bottom: 1px;
+	cursor:move;
 
 }
-.activityTilePart1{
+.activityDurationBox{
 	float:left;
 	text-indent: 5px;
+	cursor:move;
 }
 
-.activityTilePart2{
+.activityNameBox{
 
 	float:right;
 	color: #FFF;
@@ -191,10 +193,22 @@ h1
 	border-width:1px;
  	border-style:solid;
   	border-color:#404040;
+  	cursor:move;
+  	position: relative
 }
 
-.activityTilePart3{
-	float:right;
+.activityCloseBox {
+    opacity: 0;
+    color: #961111;
+    float:right;
+	cursor: pointer;
+
+}
+
+.activityNameBox:hover .activityCloseBox {
+    opacity: 1;
+    float:right;
+	cursor: pointer;
 }
 
 .addDayButtonContainer{
