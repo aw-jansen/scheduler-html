@@ -3,9 +3,8 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-	this.parkedActivityBox = container.find("#parkedActivityBox");
-	this.numberOfParkedActivities = container.find("#numberOfParkedActivities");
 
+	model.addDay();
 	function updateFields()
 	{	
 		updateActivityList();
@@ -19,42 +18,71 @@ var OverView = function (container,model) {
 
 	/*****************************************************
 
-				Creating the menu on the left
+				Creating Left menu
 
 	*****************************************************/
 
-	var parkedActivityBox = $("<table id='activityTable' class='table'>");
-	var addActivityButton = $("<button class='btn btn-success'>");
-	var addActivityButtonContainer = $("<div>");
+	var parkedActivityBox = $("<div class='parkedActivityBox'>");
+	var addActivityButton = $("<button class='btn btn-success'  style='width:100%; margin-top:5px;'>");
+	var addActivityButtonContainer = $("<div id='addActivityButton'>");
 	var numberOfParkedActivities = $("<p>");
 	var numberOfParkedActivitiesContainer = $("<div>");
 
 	addActivityButton.html("Add activity");
 	addActivityButtonContainer.append(addActivityButton);
 
-	parkedActivityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
-
-
 	function updateParkedActivityList()
-	{	
-		$(parkedActivityBox).find("tr:gt(0)").remove();
+	{	parkedActivityBox.empty();
 		
 		for(i=0; i<model.parkedActivities.length; i++)
-		{
-			parkedActivityBox.append("<tr><td>"+model.parkedActivities[i].getName()+"</td><td>"+model.parkedActivities[i].getLength()+"</td></tr>");
+		{	
+			var parkedActivityContainer = $("<div class='activityTile'>");
+			var parkedActivityNamebox = $("<div class='activityTilePart1'>");
+			var parkedActivityDurationbox = $("<div class='activityTilePart2'>");
+			
+			parkedActivityNamebox.append(model.parkedActivities[i].getName());
+			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
+
+			switch(model.parkedActivities[i].getType())
+	   		{
+		   		case "Presentation":parkedActivityNamebox.attr("style", "background:#EFC94C"); break;
+	   			case "Group Work":	parkedActivityNamebox.attr("style", "background:#E27A3F"); break;
+	   			case "Discussion":	parkedActivityNamebox.attr("style", "background:#DF5A49"); break;
+	   			case "Break":		parkedActivityNamebox.attr("style", "background:#45B29D"); break;
+		   	}
+			parkedActivityContainer.append(parkedActivityDurationbox);
+			parkedActivityContainer.append(parkedActivityNamebox);
+			parkedActivityBox.append(parkedActivityContainer);
 		}
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
 	}
 	updateParkedActivityList();
 
-	
+	// Temporary buttons for testing only --> check controller for function
+	var addToScheduleButtonContainer = $("<div class='buttonContainer'>");
+	var addToScheduleButton = $("<button class='btn btn-success'>");
+	addToScheduleButton.html("Add Test Activity to Schedule");
+	addToScheduleButtonContainer.append(addToScheduleButton);
 
+	var testButtonsContainer = $("<div class='row'>");
+	var parkActivityButton = $("<button class='btn btn-success'>");
+	var parkActivityButtonContainer = $("<div class='buttonContainer'>");
+	parkActivityButton.html("Park Test activity");
+	parkActivityButtonContainer.append(parkActivityButton);
+
+	testButtonsContainer.append(addToScheduleButtonContainer);
+	testButtonsContainer.append(parkActivityButtonContainer);
+
+	
 	/*****************************************  
-	      Append items to left  
+	      		Append items to left  
 	*****************************************/
+	left.append(addActivityButtonContainer);
 	left.append(parkedActivityBox);
 	left.append(numberOfParkedActivities);
-	left.append(addActivityButtonContainer);
+	left.append(testButtonsContainer);
+	
+	
 
 	/*****************************************************
 
@@ -62,74 +90,73 @@ var OverView = function (container,model) {
 
 	*****************************************************/
 	var dayOverview  = $("<div class='dayOverview'>");
-	var buttonsContainer = $("<div class='row'>");
-	var buttons = $("<div>");
-
-	var parkActivityButton = $("<button class='btn btn-success'>");
-	var parkActivityButtonContainer = $("<div class='buttonContainer'>");
-	parkActivityButton.html("Park activity");
-	parkActivityButtonContainer.append(parkActivityButton);
-
-	var addDayButton = $("<button class='btn btn-success'>");
-	var addDayButtonContainer = $("<div class='buttonContainer'>");
-	addDayButton.html("Add Day");
-	addDayButtonContainer.append(addDayButton);
-
-	var addToScheduleButton = $("<button class='btn btn-success'>");
-	var addToScheduleButtonContainer = $("<div class='buttonContainer'>");
-	addToScheduleButton.html("Add To Schedule");
-	addToScheduleButtonContainer.append(addToScheduleButton);
-
-	buttons.append(parkActivityButtonContainer);
-	buttons.append(addDayButtonContainer);
-	buttons.append(addToScheduleButtonContainer);
-	buttonsContainer.append(buttons);
 
 	function updateActivityList()
 	{	
 		dayOverview.empty();
+
+		// Loops trhough all days
 		for(i=0; i<model.days.length; i++)
 		{	
+
 			var dayBox = $("<div class='dayContainer'>");
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
-			dayStart.attr('value',model.days[i].getStart());
-			dayStart.attr('id',[i]);
-
+				dayStart.attr('value',model.days[i].getStart());
+				dayStart.attr('id',[i]);
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
-
-			var activityBox = $("<table id='activityTable' class='table'>");
-			activityBox.append("<tr><td><b>Activity Name</b></td><td><b>Activity Time</b></td></tr>");
-
-			for(j=0; j<model.days[i]._activities.length; j++)
-			{
-				var activityName = model.days[i]._activities[j].getName();
-				var activityLength = model.days[i]._activities[j].getLength();
-				activityBox.append("<tr><td>"+activityName+"</td><td>"+activityLength+"</td></tr>");
-			}
-
+			
 			strDate = dayStart.val();
 			arr = strDate.split(':');
 			hour = parseInt(arr[0]);
 			min = parseInt(arr[1]);
 
-			dayTitle.html("Day ");
-			dayStartBox.html("Start time: "+model.days[i].getStart());
+			dayTitle.html("Day "+(1+i));
+			dayStartBox.html("Start time ");
 			dayStartBox.append(dayStart);
 			dayEnd.html("Day end: "+model.days[i].getEnd());
-			dayLength.html("Total Length: ");
+			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
+
+			var activityBox = $("<div class='activityBox'>");
+			activityBox.empty();
+
+			// Loops trhough all activities in each day
+			for(j=0; j<model.days[i]._activities.length; j++)
+			{
+
+				var activityContainer = $("<div class='activityTile'>");
+				var activityNamebox = $("<div class='activityTilePart1'>");
+				var activityDurationbox = $("<div class='activityTilePart2'>");
+				
+				switch(model.days[i]._activities[j].getType())
+		   		{
+			   		case "Presentation"	:activityNamebox.attr("style", "background:#EFC94C");break;
+		   			case "Group Work"	:activityNamebox.attr("style", "background:#E27A3F");break;
+		   			case "Discussion"	:activityNamebox.attr("style", "background:#DF5A49");break;
+		   			case "Break"		:activityNamebox.attr("style", "background:#45B29D");break;
+				}
+				activityNamebox.append(model.days[i]._activities[j].getName());
+				activityDurationbox.html(model.days[i]._activities[j].getLength()+ " min");
+
+				activityContainer.append(activityDurationbox);
+				activityContainer.append(activityNamebox);
+				activityBox.append(activityContainer);		
+			}
+
+			/*****************************************  
+	      			Append items to dayBox  
+			*****************************************/
 
 			dayBox.append(dayTitle);
 			dayBox.append(dayStartBox);
 			dayBox.append(dayEnd);
 			dayBox.append(dayLength);
 			dayBox.append(activityBox);
-
 			dayOverview.append(dayBox);
 
-			$(dayStart).keyup(function() { 
+			$(".inputStartTime").keyup(function() { 
 		    	strDate = $(this).val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
@@ -139,7 +166,7 @@ var OverView = function (container,model) {
 				updateActivityList()
 			}); 
 
-			$(dayStart).change(function() { 
+			$(".inputStartTime").change(function() { 
 				strDate =  $(this).val();
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
@@ -148,19 +175,26 @@ var OverView = function (container,model) {
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
 				updateActivityList()
 			}); 
+				this.dayStart = dayStart;
 		}
 		
 	}
 	updateActivityList();
 
+	// Add Day button
+	var addDayButton = $("<button class='btn btn-success'>");
+	var addDayButtonContainer = $("<div class='addDayButtonContainer'>");
+	addDayButton.html("Add Day");
 
+	addDayButtonContainer.append(addDayButton);
 
+	
 
 	/*****************************************  
 	      Append items to right  
 	*****************************************/
 	right.append(dayOverview);
-	right.append(buttonsContainer);
+	right.append(addDayButtonContainer);
 		
 	/*****************************************  
 	      Append all items to container
@@ -172,7 +206,8 @@ var OverView = function (container,model) {
 	div.append(right);
 
 	container.append(div);
-
+	this.updateParkedActivityList = updateParkedActivityList;
+	this.updateActivityList = updateActivityList;
 	this.updateFields = updateFields;
 	this.parkActivityButton = parkActivityButton;
 	this.addDayButton = addDayButton;
@@ -191,8 +226,7 @@ var OverView = function (container,model) {
 	this.update = function(arg){
 		
 		// update the overview
-		updateParkedActivityList();
-		//updateActivityList();
+
 	}
 }
  

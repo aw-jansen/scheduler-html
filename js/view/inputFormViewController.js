@@ -8,8 +8,8 @@ var InputFormViewController = function(view, model ) {
 	view.saveButton.click(function(){
 
 		if( ($('#titleInput').val()!= "") && ($('#timeInput').val()!= "") && ($("#descriptionInput").val()!="") )
-		{
-			model.addParkedActivity(new Activity($('#titleInput').val(),$('#timeInput').val(),$("#activityType").find(":selected").val(),$("#descriptionInput").val()));
+		{	
+			model.addParkedActivity(new Activity($('#titleInput').val(),$('#timeInput').val(),$('option:selected',$('#activityType')).index(),$("#descriptionInput").val()));
 			window.stage("overView");
 		}
 		else

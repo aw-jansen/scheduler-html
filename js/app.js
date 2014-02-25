@@ -8,6 +8,7 @@ $(function()
 	window.stage = function()
 	{
 		$("#inputFormView").toggle();
+		overView.updateParkedActivityList();	
 	}
 	
 	//We instantiate our model
