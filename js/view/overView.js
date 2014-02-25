@@ -196,7 +196,7 @@ var OverView = function (container,model) {
 	*****************************************/
 	right.append(dayOverview);
 	right.append(addDayButtonContainer);
-		
+
 	/*****************************************  
 	      Append all items to container
 	      Bind items
