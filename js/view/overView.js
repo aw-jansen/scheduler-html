@@ -83,12 +83,13 @@ var OverView = function (container,model) {
 	left.append(testButtonsContainer);
 	
 	
-
 	/*****************************************************
 
 				Creating the right box
 
 	*****************************************************/
+	
+	//Add Day Overview
 	var dayOverview  = $("<div class='dayOverview'>");
 
 	function updateActivityList()
@@ -156,6 +157,7 @@ var OverView = function (container,model) {
 			dayBox.append(activityBox);
 			dayOverview.append(dayBox);
 
+			//Listens for changes in StartTime for each day
 			$(".inputStartTime").keyup(function() { 
 		    	strDate = $(this).val();
 				arr = strDate.split(':');
@@ -187,7 +189,6 @@ var OverView = function (container,model) {
 	addDayButton.html("Add Day");
 
 	addDayButtonContainer.append(addDayButton);
-
 	
 
 	/*****************************************  
