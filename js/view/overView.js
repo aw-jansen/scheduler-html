@@ -3,7 +3,6 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-
 	function updateFields()
 	{	
 		updateActivityList();
@@ -65,8 +64,6 @@ var OverView = function (container,model) {
 				appendTo:"body",
 				helper:"clone",
 			}).data('activity',model.parkedActivities[i]);
-
-
 			// Removes activities
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
@@ -187,6 +184,7 @@ var OverView = function (container,model) {
 					helper:"clone",
 					revert:"invalid",
 					cursor:"move"
+
 				});	
 			}
 
@@ -305,6 +303,3 @@ var OverView = function (container,model) {
 	model.addDay();
 	updateActivityList();
 }
-
-
- 
