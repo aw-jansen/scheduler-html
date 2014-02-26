@@ -17,10 +17,21 @@ var OverViewController = function(view, model ) {
 	});
 
 	view.addToScheduleButton.click(function(){
-		model.addActivity(new Activity("LikkendeAnusBal xD",45,1,""),0); 
+		model.addActivity(new Activity("LikkendeAnusBal xD",45,1,""),1); 
 		view.updateActivityList();
 		});
 
+	view.parkedActivityBox.droppable({
+		activeClass: "ui-state-default",
+		hoverClass: "ui-state-hover",
+		drop: function(event, ui){
+			alert("day"+ui.draggable.attr('day'));
+			alert("position"+ui.draggable.attr('position'));
+			model.moveActivity(ui.draggable.attr('day'), ui.draggable.attr('position'), null, 0) 
+			view.updateParkedActivityList();
+			view.updateActivityList();
+			}
+	});
 
 
 }

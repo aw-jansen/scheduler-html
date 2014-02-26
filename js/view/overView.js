@@ -3,7 +3,10 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-
+	function clearView()
+	{	
+		dayOverview.empty();
+	}
 	
 	function updateFields()
 	{	
@@ -68,18 +71,15 @@ var OverView = function (container,model) {
 		
 			});
 
-			//Listens for changes in StartTime for each day
+			// Removes activities
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
-				
 				model.removeParkedActivity(removeID);
 				updateParkedActivityList()
 			}); 
-
-
-
 		}
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
+
 	}
 	updateParkedActivityList();
 
@@ -126,6 +126,8 @@ var OverView = function (container,model) {
 		{	
 
 			var dayBox = $("<div class='dayContainer'>");
+				dayBox.attr('value',[i]);
+				dayBox.attr('id',[i]);
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
@@ -144,6 +146,15 @@ var OverView = function (container,model) {
 			dayStartBox.append(dayStart);
 			dayEnd.html("Day end: "+model.days[i].getEnd());
 			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
+
+			$(dayBox).droppable({
+				activeClass: "ui-state-default",
+				hoverClass: "ui-state-hover",
+				drop: function(event, ui){
+					alert(ui.draggable.attr('value'));
+					updateActivityList();
+				}
+			});
 
 			var activityBox = $("<div class='activityBox'>");
 			activityBox.empty();
@@ -166,6 +177,8 @@ var OverView = function (container,model) {
 				activityNamebox.append(model.days[i]._activities[j].getName());
 				activityDurationbox.html(model.days[i]._activities[j].getLength()+ " min");
 
+				activityContainer.attr('day',[i]);
+				activityContainer.attr('position',[j]);
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
 				activityBox.append(activityContainer);	
@@ -175,7 +188,6 @@ var OverView = function (container,model) {
 				{
 					appendTo:"body",
 					helper:"clone",
-			
 				});	
 			}
 
@@ -240,6 +252,7 @@ var OverView = function (container,model) {
 	div.append(right);
 
 	container.append(div);
+	this.parkedActivityBox = parkedActivityBox;
 	this.updateParkedActivityList = updateParkedActivityList;
 	this.updateActivityList = updateActivityList;
 	this.updateFields = updateFields;
