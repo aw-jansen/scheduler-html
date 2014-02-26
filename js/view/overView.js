@@ -28,6 +28,8 @@ var OverView = function (container,model) {
 		
 		for(i=0; i<model.parkedActivities.length; i++)
 		{	
+			var act = model.parkedActivities[i];
+
 			var parkedActivityContainer = $("<li class='activityContainer'>");
 			var parkedActivityDurationbox = $("<div class='activityDurationBox'>");
 			var parkedActivityNamebox = $("<div class='activityNameBox'>");
@@ -36,8 +38,8 @@ var OverView = function (container,model) {
 			closeSymbol.attr('value',i);
 			
 			parkedActivityContainer.attr('position',i);
-			parkedActivityNamebox.append(model.parkedActivities[i].getName());
-			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
+			parkedActivityNamebox.append(act.getName());
+			parkedActivityDurationbox.html(act.getLength()+ " min");
 			parkedActivityNamebox.append(closeSymbol);
 
 
@@ -79,7 +81,15 @@ var OverView = function (container,model) {
 		      {
 				if (this === ui.item.parent()[0]) 
 				{
-					model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),null,ui.item.index());
+					if(ui.item.attr('day')== null)
+					{
+						model.moveActivity(null,parseFloat(ui.item.attr('position')),null,ui.item.index());
+					}
+					else
+					{
+						model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),null,ui.item.index());
+					}
+					
 				}
 		      },
 		    }).disableSelection();
@@ -87,9 +97,7 @@ var OverView = function (container,model) {
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
 
 	}
-	updateParkedActivityList();
 
-	
 	/*****************************************  
 	      		Append items to left  
 	*****************************************/
@@ -114,14 +122,14 @@ var OverView = function (container,model) {
 		// Loops trhough all days
 		for(i=0; i<model.days.length; i++)
 		{	
-
+			var day = model.days[i];
 			var dayBox = $("<div class='dayContainer'>");
 				dayBox.attr('value',i);
 				dayBox.attr('id',i);
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
-				dayStart.attr('value',model.days[i].getStart());
+				dayStart.attr('value',day.getStart());
 				dayStart.attr('id',i);
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
@@ -129,8 +137,8 @@ var OverView = function (container,model) {
 			var timeCounter = 0;
 			var usableTime;
 
-			timeCounter = parseFloat(model.days[i].getStart().slice(0,2)*60);
-			timeCounter += parseFloat(model.days[i].getStart().slice(3));
+			timeCounter = parseFloat(day.getStart().slice(0,2)*60);
+			timeCounter += parseFloat(day.getStart().slice(3));
 
 			daynumber++;
 			
@@ -142,8 +150,8 @@ var OverView = function (container,model) {
 			dayTitle.html("Day "+(daynumber));
 			dayStartBox.html("Start time ");
 			dayStartBox.append(dayStart);
-			dayEnd.html("Day end: "+model.days[i].getEnd());
-			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
+			dayEnd.html("Day end: "+day.getEnd());
+			dayLength.html("Total Length: "+day.getTotalLength()+" min");
 
 			$(dayStart).change(function() 
 			{ 
@@ -151,7 +159,7 @@ var OverView = function (container,model) {
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
-				model.days[$(this).attr('id')].setStart(hour,min);
+				day[$(this).attr('id')].setStart(hour,min);
 			}); 
 
 			var activityBox = $("<ul class='activityBox'>");
@@ -161,31 +169,32 @@ var OverView = function (container,model) {
 			activityBox.attr('position',i);
 
 			// Loops trhough all activities in each day
-			for(j=0; j<model.days[i]._activities.length; j++)
+			for(j=0; j<day._activities.length; j++)
 			{
+				var activity = day._activities[j];
 
 				var activityContainer = $("<li class='activityContainer'>");
 				var activityDurationbox = $("<div class='activityDurationBox'>");
 				var activityNamebox = $("<div class='activityNameBox'>");
 
-				switch(model.days[i]._activities[j].getType())
+				switch(activity.getType())
 		   		{
 			   		case "Presentation"	:activityNamebox.addClass('presentation');break;
 		   			case "Group Work"	:activityNamebox.addClass('groupwork');break;
 		   			case "Discussion"	:activityNamebox.addClass('discussion');break;
 		   			case "Break"		:activityNamebox.addClass('break');break;
 				}
-				activityNamebox.append(model.days[i]._activities[j].getName());
+				activityNamebox.append(activity.getName());
 				
-				timeCounter = timeCounter + model.days[i]._activities[j].getLength();
+				timeCounter = timeCounter + activity.getLength();
 				var h = ("0"+Math.floor(timeCounter/60)).slice(-2);
 				var m = ("0"+Math.floor(timeCounter % 60)).slice(-2);
 				var usableTime = h+":"+m;
 
 				activityDurationbox.html(usableTime);
 
-				activityContainer.attr('day',[i]);
-				activityContainer.attr('position',[j]);
+				activityContainer.attr('day',i);
+				activityContainer.attr('position',j);
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
 				activityBox.append(activityContainer);	
@@ -207,23 +216,12 @@ var OverView = function (container,model) {
 
 			******************************/
 
-			activityBox.droppable({
-				activeClass: "ui-state-default",
-				hoverClass: "ui-state-hover",
-				accept: ":not(.ui-sortable-helper)",
-				drop: function( event, ui ) 
-				{
-					model.moveActivity(null,parseFloat(ui.draggable.attr('position')),parseFloat(this.id),0);
-				}
-
-		    }).sortable({
+			activityBox.sortable({
 		      items: "li:not(.placeholder)",
 		      connectWith: "ul",
 		      sort: function() 
 		      {
 		        $( this ).removeClass( "ui-state-default" );
-		        //var act = ui.draggable.data('activity');
-		        //model.moveActivity()
 		      },
 		      update:function(event,ui)
 		      {
@@ -244,7 +242,6 @@ var OverView = function (container,model) {
 				}
 		      },
 		    }).disableSelection();
-		    //.data('activity',model.days[i].);
 		}
 		
 	}
@@ -292,6 +289,7 @@ var OverView = function (container,model) {
 		updateActivityList();
 		updateParkedActivityList();
 	}
+	
 	model.addDay();
 
 	createTestData();

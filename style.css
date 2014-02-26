@@ -42,10 +42,9 @@ h1
 	min-width:50px;
 	max-height: 600px;
 }
-#rightbox{
-
- overflow-x:auto;
-    overflow-y:auto;
+#rightbox
+{
+	
 }
 #inputFormBox
 {

@@ -90,7 +90,6 @@ var InputFormView = function (container,model) {
 	this.updateFields = updateFields;
 	this.saveButton = saveButton;
 	this.cancelButton = cancelButton;
-	this.existingActivity = existingActivity;
 	this.currentActivity = currentActivity;
 	
 	/*****************************************  

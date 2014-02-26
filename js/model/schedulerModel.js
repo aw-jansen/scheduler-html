@@ -182,10 +182,18 @@ function Model(){
 	}
 	
 	// add an activity to parked activities
-	this.addParkedActivity = function(activity){
-		this.parkedActivities.push(activity);
+	this.addParkedActivity = function(activity,position)
+	{
+		if(position != null)
+		{
+			this.parkedActivities.splice(position,0,activity);
+		} 
+		else 
+		{
+			this.parkedActivities.push(activity);
+		}
 		this.notifyObservers();
-	};
+	}
 	
 	// remove an activity on provided position from parked activites 
 	this.removeParkedActivity = function(position) {
@@ -200,7 +208,12 @@ function Model(){
 	this.moveActivity = function(oldday, oldposition, newday, newposition) {
 		if(oldday !== null && oldday == newday) {
 			this.days[oldday]._moveActivity(oldposition,newposition);
-		}else if(oldday == null) {
+		}else if(oldday == null && newday == null)
+		{
+			var activity = this.removeParkedActivity(oldposition);
+			this.addParkedActivity(activity,newposition);
+		}
+		else if(oldday == null) {
 			var activity = this.removeParkedActivity(oldposition);
 			this.days[newday]._addActivity(activity,newposition);
 		}else if(newday == null) {
