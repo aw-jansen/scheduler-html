@@ -3,11 +3,6 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-	function clearView()
-	{	
-		dayOverview.empty();
-	}
-	
 	function updateFields()
 	{	
 		updateActivityList();
@@ -68,7 +63,6 @@ var OverView = function (container,model) {
 			{
 				appendTo:"body",
 				helper:"clone",
-		
 			});
 
 			// Removes activities
@@ -151,8 +145,6 @@ var OverView = function (container,model) {
 				activeClass: "ui-state-default",
 				hoverClass: "ui-state-hover",
 				drop: function(event, ui){
-					alert(ui.draggable.attr('value'));
-					updateActivityList();
 				}
 			});
 

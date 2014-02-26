@@ -22,14 +22,15 @@ var OverViewController = function(view, model ) {
 		});
 
 	view.parkedActivityBox.droppable({
-		activeClass: "ui-state-default",
-		hoverClass: "ui-state-hover",
+	
+		
 		drop: function(event, ui){
 			alert("day"+ui.draggable.attr('day'));
 			alert("position"+ui.draggable.attr('position'));
-			model.moveActivity(ui.draggable.attr('day'), ui.draggable.attr('position'), null, 0) 
-			view.updateParkedActivityList();
+			model.moveActivity(ui.draggable.attr('day'), ui.draggable.attr('position'), null, 0)
 			view.updateActivityList();
+			view.updateParkedActivityList();
+			
 			}
 	});
 
