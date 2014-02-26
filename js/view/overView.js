@@ -53,14 +53,11 @@ var OverView = function (container,model) {
 			parkedActivityContainer.append(parkedActivityNamebox);
 			parkedActivityList.append(parkedActivityContainer);
 
-			// Making the stuff draggable
-			/*
-			$(parkedActivityContainer).draggable(
-			{
-				appendTo:"body",
-				helper:"clone",
-			}).data('activity',model.parkedActivities[i]);
-			*/
+			
+			$(parkedActivityContainer).click(function(){
+				window.stage(model.parkedActivities[$(this).attr('position')]);
+			});
+			
 
 			// Removes activities
 			closeSymbol.click(function() { 
@@ -92,21 +89,6 @@ var OverView = function (container,model) {
 	}
 	updateParkedActivityList();
 
-	// Temporary buttons for testing only --> check controller for function
-	var addToScheduleButtonContainer = $("<div class='buttonContainer'>");
-	var addToScheduleButton = $("<button class='btn btn-success'>");
-	addToScheduleButton.html("Add Test Activity to Schedule");
-	addToScheduleButtonContainer.append(addToScheduleButton);
-
-	var testButtonsContainer = $("<div class='row'>");
-	var parkActivityButton = $("<button class='btn btn-success'>");
-	var parkActivityButtonContainer = $("<div class='buttonContainer'>");
-	parkActivityButton.html("Park Test activity");
-	parkActivityButtonContainer.append(parkActivityButton);
-
-	testButtonsContainer.append(addToScheduleButtonContainer);
-	testButtonsContainer.append(parkActivityButtonContainer);
-
 	
 	/*****************************************  
 	      		Append items to left  
@@ -114,7 +96,6 @@ var OverView = function (container,model) {
 	left.append(addActivityButtonContainer);
 	left.append(parkedActivityList);
 	left.append(numberOfParkedActivities);
-	left.append(testButtonsContainer);
 	
 	
 	/*****************************************************
@@ -145,6 +126,11 @@ var OverView = function (container,model) {
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
 			var daynumber = i;
+			var timeCounter = 0;
+			var usableTime;
+
+			timeCounter = parseFloat(model.days[i].getStart().slice(0,2)*60);
+			timeCounter += parseFloat(model.days[i].getStart().slice(3));
 
 			daynumber++;
 			
@@ -158,6 +144,15 @@ var OverView = function (container,model) {
 			dayStartBox.append(dayStart);
 			dayEnd.html("Day end: "+model.days[i].getEnd());
 			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
+
+			$(dayStart).change(function() 
+			{ 
+				strDate =  $(this).val();
+				arr = strDate.split(':');
+				hour = parseInt(arr[0]);
+				min = parseInt(arr[1]);
+				model.days[$(this).attr('id')].setStart(hour,min);
+			}); 
 
 			var activityBox = $("<ul class='activityBox'>");
 			activityBox.empty();
@@ -181,7 +176,13 @@ var OverView = function (container,model) {
 		   			case "Break"		:activityNamebox.addClass('break');break;
 				}
 				activityNamebox.append(model.days[i]._activities[j].getName());
-				activityDurationbox.html(model.days[i]._activities[j].getLength()+ " min");
+				
+				timeCounter = timeCounter + model.days[i]._activities[j].getLength();
+				var h = ("0"+Math.floor(timeCounter/60)).slice(-2);
+				var m = ("0"+Math.floor(timeCounter % 60)).slice(-2);
+				var usableTime = h+":"+m;
+
+				activityDurationbox.html(usableTime);
 
 				activityContainer.attr('day',[i]);
 				activityContainer.attr('position',[j]);
@@ -200,27 +201,6 @@ var OverView = function (container,model) {
 			dayBox.append(dayLength);
 			dayBox.append(activityBox);
 			dayOverview.append(dayBox);
-
-			//Listens for changes in StartTime for each day
-			$(".inputStartTime").keyup(function() { 
-		    	strDate = $(this).val();
-				arr = strDate.split(':');
-				hour = parseInt(arr[0]);
-				min = parseInt(arr[1]);
-				model.days[$(this).attr('id')].setStart(hour,min);
-				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
-				updateActivityList();
-			}); 
-
-			$(".inputStartTime").change(function() { 
-				strDate =  $(this).val();
-				arr = strDate.split(':');
-				hour = parseInt(arr[0]);
-				min = parseInt(arr[1]);
-				model.days[$(this).attr('id')].setStart(hour,min);
-				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
-				updateActivityList();
-			}); 
 
 			/******************************
 				Drag & Drop Interaction
@@ -296,10 +276,8 @@ var OverView = function (container,model) {
 	this.parkedActivityList = parkedActivityList;
 	this.updateParkedActivityList = updateParkedActivityList;
 	this.updateActivityList = updateActivityList;
-	this.parkActivityButton = parkActivityButton;
 	this.addDayButton = addDayButton;
 	this.addActivityButton = addActivityButton;
-	this.addToScheduleButton = addToScheduleButton;
 	
 	/*****************************************  
 	      Observer implementation    

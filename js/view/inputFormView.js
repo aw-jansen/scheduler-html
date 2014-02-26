@@ -1,11 +1,6 @@
 //OverView Object constructor
 var InputFormView = function (container,model) {
 
-	function updateFields()
-	{	
-		updateInputFields();
-	}
-
 	var div = $("<div id='inputFormBox'>");
 	var form = $("<form role='form'>");
 	var greyout = $("<div id='greyout'>");
@@ -14,11 +9,14 @@ var InputFormView = function (container,model) {
 			Creating the activity creation box
 
 	*****************************************************/
+
+	// for storing the current activity
+	var currentActivity;
 	
 	var acitivityTypeDropDownContainer = $("<div class='form-group'>");
 	var acitivityTypeDropDown = $("<select class='form-control' id='activityType'>");
 
-	acitivityTypeDropDown.append("<option>Presentation</option><option>Group Work</option><option>Discussion</option><option>Break</option>");
+	acitivityTypeDropDown.append("<option value='0'>Presentation</option><option value='1'>Group Work</option><option value='2'>Discussion</option><option value='3'>Break</option>");
 
 	var titleInputContainer = $("<div class='form-group'>");
 	var titleInput = $("<input type='textarea' id='titleInput' class='form-control' placeholder='Activity title'>");
@@ -36,18 +34,35 @@ var InputFormView = function (container,model) {
 	
 	descriptionInputContainer.append(descriptionInput);
 
-	form.html('<h3>Create New Activity</h3>');
+	var h3 = $("<h3>");
+	h3.html('Create New Activity');
 	
+	form.append(h3);
 	form.append(titleInputContainer);
 	form.append(timeInputContainer);
 	form.append(acitivityTypeDropDownContainer);
 	form.append(descriptionInputContainer);
 
-	function updateInputFields()
+	function updateFields(activity)
 	{
-		$(titleInput).val("");
-		$(timeInput).val("");
-		$(descriptionInput).val("");
+		if(activity != null)
+		{
+			this.currentActivity = activity;
+			h3.html('Edit '+activity.getName());
+			$(titleInput).val(activity.getName());
+			$(timeInput).val(activity.getLength());
+			$(acitivityTypeDropDown).val(activity.getTypeId());
+			$(descriptionInput).val(activity.getDescription());
+		}
+		else
+		{
+			h3.html('Create New Activity');
+			$(titleInput).val("");
+			$(timeInput).val("");
+			$(acitivityTypeDropDown).val(0);
+			$(descriptionInput).val("");
+		}
+		
 	}
 
 	var cancelButton = $("<button class='btn btn-danger'>");
@@ -75,6 +90,8 @@ var InputFormView = function (container,model) {
 	this.updateFields = updateFields;
 	this.saveButton = saveButton;
 	this.cancelButton = cancelButton;
+	this.existingActivity = existingActivity;
+	this.currentActivity = currentActivity;
 	
 	/*****************************************  
 	      Observer implementation    
@@ -85,9 +102,8 @@ var InputFormView = function (container,model) {
 	model.addObserver(this);
 	
 	//This function gets called when there is a change at the model
-	this.update = function(arg){
-
+	this.update = function(arg)
+	{
 		// update the overview
-		
 	}
 }
