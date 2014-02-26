@@ -57,7 +57,7 @@ var OverView = function (container,model) {
 
 			
 			$(parkedActivityContainer).click(function(){
-				window.stage(model.parkedActivities[$(this).attr('position')]);
+				window.stage(activity);
 			});
 			
 
@@ -168,7 +168,7 @@ var OverView = function (container,model) {
 			activityBox.attr('day',i);
 			activityBox.attr('position',i);
 
-			// Loops trhough all activities in each day
+			// Loops through all activities in each day
 			for(j=0; j<day._activities.length; j++)
 			{
 				var activity = day._activities[j];
@@ -198,6 +198,10 @@ var OverView = function (container,model) {
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
 				activityBox.append(activityContainer);	
+
+				$(activityContainer).click(function(){
+					window.stage(activity);
+				});
 			}
 
 			/*****************************************  
