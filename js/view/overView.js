@@ -6,7 +6,6 @@ var OverView = function (container,model) {
 	var div = $("<div class='row'>");
 	var left = $("<div id='leftbox' class='col-md-3'>");
 	var right = $("<div id='rightbox' class='col-md-9'>");
-	var middle = $("<div id='middlebox' class='col-md-12'>");
 
 	/*****************************************************
 
@@ -14,8 +13,8 @@ var OverView = function (container,model) {
 
 	*****************************************************/
 
-	var parkedActivityBox = $("<div class='parkedActivityBox' id='parkedActivityBox'>");
-	var addActivityButton = $("<button class='btn btn-success'  style='width:100%; margin-top:10px;'>");
+	var parkedActivityList = $("<ul id='parkedActivityList'>");
+	var addActivityButton = $("<button class='btn btn-success' style='width:100%; margin-top:10px;'>");
 	var addActivityButtonContainer = $("<div id='addActivityButton'>");
 	var numberOfParkedActivities = $("<p>");
 	var numberOfParkedActivitiesContainer = $("<div>");
@@ -24,16 +23,17 @@ var OverView = function (container,model) {
 	addActivityButtonContainer.append(addActivityButton);
 
 	function updateParkedActivityList()
-	{	parkedActivityBox.empty();
+	{	
+		parkedActivityList.empty();
 		
 		for(i=0; i<model.parkedActivities.length; i++)
 		{	
-			var parkedActivityContainer = $("<div class='activityContainer'>");
+			var parkedActivityContainer = $("<li class='activityContainer'>");
 			var parkedActivityDurationbox = $("<div class='activityDurationBox'>");
 			var parkedActivityNamebox = $("<div class='activityNameBox'>");
 			var closeSymbol =$("<div class='activityCloseBox'>");
 			closeSymbol.append("<img src='images/close.png'>")
-			closeSymbol.attr('value',[i]);
+			closeSymbol.attr('value',i);
 			
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
 			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
@@ -50,7 +50,7 @@ var OverView = function (container,model) {
 
 		   	parkedActivityContainer.append(parkedActivityDurationbox);
 			parkedActivityContainer.append(parkedActivityNamebox);
-			parkedActivityBox.append(parkedActivityContainer);
+			parkedActivityList.append(parkedActivityContainer);
 
 			// Making the stuff draggable
 			$(parkedActivityContainer).draggable(
@@ -90,7 +90,7 @@ var OverView = function (container,model) {
 	      		Append items to left  
 	*****************************************/
 	left.append(addActivityButtonContainer);
-	left.append(parkedActivityBox);
+	left.append(parkedActivityList);
 	left.append(numberOfParkedActivities);
 	left.append(testButtonsContainer);
 	
@@ -137,14 +137,7 @@ var OverView = function (container,model) {
 			dayEnd.html("Day end: "+model.days[i].getEnd());
 			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
 
-			$(dayBox).droppable({
-				activeClass: "ui-state-default",
-				hoverClass: "ui-state-hover",
-				drop: function(event, ui){
-				}
-			});
-
-			var activityBox = $("<div class='activityBox'>");
+			var activityBox = $("<ul class='activityBox'>");
 			activityBox.empty();
 			activityBox.attr('id',i);
 
@@ -152,7 +145,7 @@ var OverView = function (container,model) {
 			for(j=0; j<model.days[i]._activities.length; j++)
 			{
 
-				var activityContainer = $("<div class='activityContainer'>");
+				var activityContainer = $("<li class='activityContainer'>");
 				var activityDurationbox = $("<div class='activityDurationBox'>");
 				var activityNamebox = $("<div class='activityNameBox'>");
 
@@ -223,10 +216,7 @@ var OverView = function (container,model) {
 		    }).sortable({
 		      items: "li:not(.placeholder)",
 		      sort: function() {
-		        // gets added unintentionally by droppable interacting with sortable
-		        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
 		        $( this ).removeClass( "ui-state-default" );
-
 		      }
 		    });
 		}
@@ -253,12 +243,11 @@ var OverView = function (container,model) {
 
 	*****************************************/
 
-	div.append(middle);
 	div.append(left);
 	div.append(right);
 
 	container.append(div);
-	this.parkedActivityBox = parkedActivityBox;
+	this.parkedActivityList = parkedActivityList;
 	this.updateParkedActivityList = updateParkedActivityList;
 	this.updateActivityList = updateActivityList;
 	this.parkActivityButton = parkActivityButton;
@@ -279,5 +268,6 @@ var OverView = function (container,model) {
 		updateActivityList();
 		updateParkedActivityList();
 	}
+	model.addDay();
 	
 }

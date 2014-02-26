@@ -239,15 +239,6 @@ h1
 	width:100%;
 }
 
-.parkedActivityBox{
-	margin-top: 10px;
-	height: 355px;
-	overflow: auto;
-  	border-width:1px;
- 	border-style:dashed;
-  	border-color:#6E6E6E;
-}
-
 .presentation
 {
 	background:#EFC94C;
@@ -266,4 +257,24 @@ h1
 .break
 {
 	background:#45B29D
+}
+
+ul
+{
+	list-style:none;
+}
+
+ul#parkedActivityList
+{
+	margin-top: 10px;
+	height: 355px;
+	overflow: auto;
+  	border-width:1px;
+ 	border-style:dashed;
+  	border-color:#6E6E6E;
+}
+
+li
+{
+	list-style:none;
 }
