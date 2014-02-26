@@ -3,7 +3,6 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-
 	
 	function updateFields()
 	{	
@@ -50,10 +49,10 @@ var OverView = function (container,model) {
 
 			switch(model.parkedActivities[i].getType())
 	   		{
-		   		case "Presentation":parkedActivityNamebox.css("background", "#EFC94C"); break;
-	   			case "Group Work":	parkedActivityNamebox.attr("style", "background:#E27A3F"); break;
-	   			case "Discussion":	parkedActivityNamebox.attr("style", "background:#DF5A49"); break;
-	   			case "Break":		parkedActivityNamebox.attr("style", "background:#45B29D"); break;
+		   		case "Presentation":parkedActivityNamebox.addClass('presentation'); break;
+	   			case "Group Work":	parkedActivityNamebox.addClass('groupwork'); break;
+	   			case "Discussion":	parkedActivityNamebox.addClass('discussion'); break;
+	   			case "Break":		parkedActivityNamebox.addClass('break'); break;
 		   	}
 
 		   	parkedActivityContainer.append(parkedActivityDurationbox);
@@ -65,13 +64,11 @@ var OverView = function (container,model) {
 			{
 				appendTo:"body",
 				helper:"clone",
-		
-			});
+			}).data('activity',model.parkedActivities[i]);
 
 			//Listens for changes in StartTime for each day
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
-				
 				model.removeParkedActivity(removeID);
 				updateParkedActivityList()
 			}); 
@@ -130,16 +127,19 @@ var OverView = function (container,model) {
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
 				dayStart.attr('value',model.days[i].getStart());
-				dayStart.attr('id',[i]);
+				dayStart.attr('id',i);
 			var dayEnd = $("<p>");
 			var dayLength = $("<p>");
+			var daynumber = i;
+
+			daynumber++;
 			
 			strDate = dayStart.val();
 			arr = strDate.split(':');
 			hour = parseInt(arr[0]);
 			min = parseInt(arr[1]);
 
-			dayTitle.html("Day "+(1+i));
+			dayTitle.html("Day "+(daynumber));
 			dayStartBox.html("Start time ");
 			dayStartBox.append(dayStart);
 			dayEnd.html("Day end: "+model.days[i].getEnd());
@@ -158,10 +158,10 @@ var OverView = function (container,model) {
 
 				switch(model.days[i]._activities[j].getType())
 		   		{
-			   		case "Presentation"	:activityNamebox.attr("style", "background:#EFC94C");break;
-		   			case "Group Work"	:activityNamebox.attr("style", "background:#E27A3F");break;
-		   			case "Discussion"	:activityNamebox.attr("style", "background:#DF5A49");break;
-		   			case "Break"		:activityNamebox.attr("style", "background:#45B29D");break;
+			   		case "Presentation"	:activityNamebox.addClass('presentation');break;
+		   			case "Group Work"	:activityNamebox.addClass('groupwork');break;
+		   			case "Discussion"	:activityNamebox.addClass('discussion');break;
+		   			case "Break"		:activityNamebox.addClass('break');break;
 				}
 				activityNamebox.append(model.days[i]._activities[j].getName());
 				activityDurationbox.html(model.days[i]._activities[j].getLength()+ " min");
@@ -175,7 +175,8 @@ var OverView = function (container,model) {
 				{
 					appendTo:"body",
 					helper:"clone",
-			
+					revert:"invalid",
+					cursor:"move"
 				});	
 			}
 
@@ -198,7 +199,7 @@ var OverView = function (container,model) {
 				min = parseInt(arr[1]);
 				model.days[$(this).attr('id')].setStart(hour,min);
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
-				updateActivityList()
+				updateActivityList();
 			}); 
 
 			$(".inputStartTime").change(function() { 
@@ -208,12 +209,40 @@ var OverView = function (container,model) {
 				min = parseInt(arr[1]);
 				model.days[$(this).attr('id')].setStart(hour,min);
 				dayEnd.html("Day end: "+model.days[$(this).attr('id')].getEnd());
-				updateActivityList()
+				updateActivityList();
 			}); 
+
+			/******************************
+				Drag & Drop Interaction
+
+			******************************/
+
+			activityBox.droppable({
+
+				activeClass: "ui-state-default",
+				hoverClass: "ui-state-hover",
+				accept: ":not(.ui-sortable-helper)",
+				drop: function( event, ui ) 
+				{
+					var act = ui.draggable.data('activity');
+					$( this ).find( ".placeholder" ).remove();
+					model.addActivity(act,i-1,0);
+					updateActivityList();
+				}
+
+		    })/*.sortable({
+
+		      items: "li:not(.placeholder)",
+		      sort: function() {
+		        // gets added unintentionally by droppable interacting with sortable
+		        // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+		        $( this ).removeClass( "ui-state-default" );
+
+		      }
+		    })*/;
 		}
 		
 	}
-	updateActivityList();
 
 	// Add Day button
 	var addDayButton = $("<button class='btn btn-success'>");

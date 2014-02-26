@@ -225,9 +225,6 @@ function Model(){
 	    listeners.push(listener);
 	};
 	//*** END OBSERVABLE PATTERN ***
-
-	
-	
 }
 
 // this is the instance of our main model

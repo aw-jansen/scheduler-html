@@ -1,9 +1,8 @@
 //OverViewController Object constructor
-var OverViewController = function(view, model ) {
+var OverViewController = function(view, model) {
 
 	view.addActivityButton.click(function(){
-		window.stage("inputFormView");
-		//view.updateFields();
+		window.stage();
 	});
 
 	view.parkActivityButton.click(function(){
