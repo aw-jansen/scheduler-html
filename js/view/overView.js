@@ -54,17 +54,41 @@ var OverView = function (container,model) {
 			parkedActivityList.append(parkedActivityContainer);
 
 			// Making the stuff draggable
+			/*
 			$(parkedActivityContainer).draggable(
 			{
 				appendTo:"body",
 				helper:"clone",
 			}).data('activity',model.parkedActivities[i]);
+			*/
+
 			// Removes activities
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
 				model.removeParkedActivity(removeID);
 			}); 
 		}
+
+			parkedActivityList.sortable({
+		      items: "li:not(.placeholder)",
+		      connectWith: "ul",
+		      sort: function() 
+		      {
+		        $( this ).removeClass( "ui-state-default" );
+		      },
+		      update:function(event,ui)
+		      {
+				if (this === ui.item.parent()[0]) 
+				{
+					model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),null,ui.item.index());
+				}
+				else
+				{
+
+				}
+		      },
+		    }).disableSelection();
+
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
 
 	}
@@ -216,7 +240,7 @@ var OverView = function (container,model) {
 
 		    }).sortable({
 		      items: "li:not(.placeholder)",
-		      connectWith: "ul.activityBox",
+		      connectWith: "ul",
 		      sort: function() 
 		      {
 		        $( this ).removeClass( "ui-state-default" );
@@ -227,13 +251,19 @@ var OverView = function (container,model) {
 		      {
 				if (this === ui.item.parent()[0]) 
 				{
-					model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),parseFloat(this.id),ui.item.index());
+					if(ui.item.attr('day')!= null)
+					{
+						model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),parseFloat(this.id),ui.item.index());
+					}
+					else
+					{
+						model.moveActivity(null,parseFloat(ui.item.attr('position')),parseFloat(this.id),ui.item.index());
+					}
 				}
 				else
 				{
-					
+
 				}
-		      	
 		      },
 		    }).disableSelection();
 		    //.data('activity',model.days[i].);
