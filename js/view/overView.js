@@ -3,7 +3,7 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-	
+
 	function updateFields()
 	{	
 		updateActivityList();
@@ -39,7 +39,7 @@ var OverView = function (container,model) {
 			var parkedActivityDurationbox = $("<div class='activityDurationBox'>");
 			var parkedActivityNamebox = $("<div class='activityNameBox'>");
 			var closeSymbol =$("<div class='activityCloseBox'>");
-			closeSymbol.append("<img src='images/wastebin.png'>")
+			closeSymbol.append("<img src='images/close.png'>")
 			closeSymbol.attr('value',[i]);
 			
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
@@ -66,17 +66,16 @@ var OverView = function (container,model) {
 				helper:"clone",
 			}).data('activity',model.parkedActivities[i]);
 
-			//Listens for changes in StartTime for each day
+
+			// Removes activities
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
 				model.removeParkedActivity(removeID);
 				updateParkedActivityList()
 			}); 
-
-
-
 		}
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
+
 	}
 	updateParkedActivityList();
 
@@ -123,6 +122,8 @@ var OverView = function (container,model) {
 		{	
 
 			var dayBox = $("<div class='dayContainer'>");
+				dayBox.attr('value',[i]);
+				dayBox.attr('id',[i]);
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
@@ -145,6 +146,13 @@ var OverView = function (container,model) {
 			dayEnd.html("Day end: "+model.days[i].getEnd());
 			dayLength.html("Total Length: "+model.days[i].getTotalLength()+" min");
 
+			$(dayBox).droppable({
+				activeClass: "ui-state-default",
+				hoverClass: "ui-state-hover",
+				drop: function(event, ui){
+				}
+			});
+
 			var activityBox = $("<div class='activityBox'>");
 			activityBox.empty();
 
@@ -166,6 +174,8 @@ var OverView = function (container,model) {
 				activityNamebox.append(model.days[i]._activities[j].getName());
 				activityDurationbox.html(model.days[i]._activities[j].getLength()+ " min");
 
+				activityContainer.attr('day',[i]);
+				activityContainer.attr('position',[j]);
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
 				activityBox.append(activityContainer);	
@@ -269,6 +279,7 @@ var OverView = function (container,model) {
 	div.append(right);
 
 	container.append(div);
+	this.parkedActivityBox = parkedActivityBox;
 	this.updateParkedActivityList = updateParkedActivityList;
 	this.updateActivityList = updateActivityList;
 	this.updateFields = updateFields;
