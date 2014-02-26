@@ -3,12 +3,6 @@ var OverView = function (container,model) {
 	
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
-	function updateFields()
-	{	
-		updateActivityList();
-		updateParkedActivityList();
-	}
-	
 	var div = $("<div class='row'>");
 	var left = $("<div id='leftbox' class='col-md-3'>");
 	var right = $("<div id='rightbox' class='col-md-9'>");
@@ -119,8 +113,8 @@ var OverView = function (container,model) {
 		{	
 
 			var dayBox = $("<div class='dayContainer'>");
-				dayBox.attr('value',[i]);
-				dayBox.attr('id',[i]);
+				dayBox.attr('value',i);
+				dayBox.attr('id',i);
 			var dayTitle = $("<h4>");
 			var dayStartBox= $("<div>");
 			var dayStart = $("<input type='time' class='inputStartTime'>");
@@ -152,6 +146,7 @@ var OverView = function (container,model) {
 
 			var activityBox = $("<div class='activityBox'>");
 			activityBox.empty();
+			activityBox.attr('id',i);
 
 			// Loops trhough all activities in each day
 			for(j=0; j<model.days[i]._activities.length; j++)
@@ -176,16 +171,6 @@ var OverView = function (container,model) {
 				activityContainer.append(activityDurationbox);
 				activityContainer.append(activityNamebox);
 				activityBox.append(activityContainer);	
-
-				// Making the stuff draggable
-				$(activityContainer).draggable(
-				{
-					appendTo:"body",
-					helper:"clone",
-					revert:"invalid",
-					cursor:"move"
-
-				});	
 			}
 
 			/*****************************************  
@@ -226,20 +211,16 @@ var OverView = function (container,model) {
 			******************************/
 
 			activityBox.droppable({
-
 				activeClass: "ui-state-default",
 				hoverClass: "ui-state-hover",
 				accept: ":not(.ui-sortable-helper)",
 				drop: function( event, ui ) 
 				{
 					var act = ui.draggable.data('activity');
-					$( this ).find( ".placeholder" ).remove();
-					model.addActivity(act,i-1,0);
-					updateActivityList();
+					model.addActivity(act,this.id,0);
 				}
 
-		    })/*.sortable({
-
+		    }).sortable({
 		      items: "li:not(.placeholder)",
 		      sort: function() {
 		        // gets added unintentionally by droppable interacting with sortable
@@ -247,7 +228,7 @@ var OverView = function (container,model) {
 		        $( this ).removeClass( "ui-state-default" );
 
 		      }
-		    })*/;
+		    });
 		}
 		
 	}
@@ -280,7 +261,6 @@ var OverView = function (container,model) {
 	this.parkedActivityBox = parkedActivityBox;
 	this.updateParkedActivityList = updateParkedActivityList;
 	this.updateActivityList = updateActivityList;
-	this.updateFields = updateFields;
 	this.parkActivityButton = parkActivityButton;
 	this.addDayButton = addDayButton;
 	this.addActivityButton = addActivityButton;
@@ -296,10 +276,8 @@ var OverView = function (container,model) {
 	
 	//This function gets called when there is a change at the model
 	this.update = function(arg){
-		
-		// update the overview
-
+		updateActivityList();
+		updateParkedActivityList();
 	}
-	model.addDay();
-	updateActivityList();
+	
 }
