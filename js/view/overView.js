@@ -64,14 +64,16 @@ var OverView = function (container,model) {
 
 			// Removes activities
 			closeSymbol.click(function() { 
-		    	removeID = $(this).val();
+		    	removeID = $(this).attr('value');
 				model.removeParkedActivity(removeID);
-			}); 
+				updateParkedActivityList();
+			});
 		}
 
 			parkedActivityList.sortable({
 		      items: "li:not(.placeholder)",
 		      connectWith: "ul",
+		      cancel: ".activityCloseBox",
 		      sort: function() 
 		      {
 		        $( this ).removeClass( "ui-state-default" );
@@ -81,10 +83,6 @@ var OverView = function (container,model) {
 				if (this === ui.item.parent()[0]) 
 				{
 					model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),null,ui.item.index());
-				}
-				else
-				{
-
 				}
 		      },
 		    }).disableSelection();

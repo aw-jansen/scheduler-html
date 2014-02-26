@@ -141,7 +141,7 @@ function Day(startH,startM) {
 	// don't call it directly
 	this._moveActivity = function(oldposition,newposition) {
 		if(newposition > oldposition) {
-			newposition--;
+			//newposition--;
 		}
 		var activity = this._removeActivity(oldposition);
 		this._addActivity(activity, newposition);
