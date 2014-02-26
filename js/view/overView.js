@@ -35,6 +35,7 @@ var OverView = function (container,model) {
 			closeSymbol.append("<img src='images/close.png'>")
 			closeSymbol.attr('value',i);
 			
+			parkedActivityContainer.attr('position',i);
 			parkedActivityNamebox.append(model.parkedActivities[i].getName());
 			parkedActivityDurationbox.html(model.parkedActivities[i].getLength()+ " min");
 			parkedActivityNamebox.append(closeSymbol);
@@ -62,7 +63,6 @@ var OverView = function (container,model) {
 			closeSymbol.click(function() { 
 		    	removeID = $(this).val();
 				model.removeParkedActivity(removeID);
-				updateParkedActivityList()
 			}); 
 		}
 		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
@@ -140,6 +140,8 @@ var OverView = function (container,model) {
 			var activityBox = $("<ul class='activityBox'>");
 			activityBox.empty();
 			activityBox.attr('id',i);
+			activityBox.attr('day',i);
+			activityBox.attr('position',i);
 
 			// Loops trhough all activities in each day
 			for(j=0; j<model.days[i]._activities.length; j++)
@@ -209,16 +211,32 @@ var OverView = function (container,model) {
 				accept: ":not(.ui-sortable-helper)",
 				drop: function( event, ui ) 
 				{
-					var act = ui.draggable.data('activity');
-					model.addActivity(act,this.id,0);
+					model.moveActivity(null,parseFloat(ui.draggable.attr('position')),parseFloat(this.id),0);
 				}
 
 		    }).sortable({
 		      items: "li:not(.placeholder)",
-		      sort: function() {
+		      connectWith: "ul.activityBox",
+		      sort: function() 
+		      {
 		        $( this ).removeClass( "ui-state-default" );
-		      }
-		    });
+		        //var act = ui.draggable.data('activity');
+		        //model.moveActivity()
+		      },
+		      update:function(event,ui)
+		      {
+				if (this === ui.item.parent()[0]) 
+				{
+					model.moveActivity(parseFloat(ui.item.attr('day')),parseFloat(ui.item.attr('position')),parseFloat(this.id),ui.item.index());
+				}
+				else
+				{
+					
+				}
+		      	
+		      },
+		    }).disableSelection();
+		    //.data('activity',model.days[i].);
 		}
 		
 	}
@@ -269,5 +287,17 @@ var OverView = function (container,model) {
 		updateParkedActivityList();
 	}
 	model.addDay();
+
+	createTestData();
+
+	function createTestData()
+	{
+		model.addParkedActivity(new Activity("1",10,0,"1"));
+		model.addParkedActivity(new Activity("2",10,0,"2"));
+		model.addParkedActivity(new Activity("3",10,0,"3"));
+		model.addParkedActivity(new Activity("4",10,0,"4"));
+		model.addParkedActivity(new Activity("5",10,0,"5"));
+		model.addParkedActivity(new Activity("6",10,0,"6"));
+	}
 	
 }
