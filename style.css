@@ -185,31 +185,29 @@ h1
 }
 
 .activityContainer{
-	width:235px;
+	width:100%;
 	height:30px;
-	float: right;
-	margin-bottom: 1px;
-	cursor:move;
-
+	float:left;
 }
 .activityDurationBox{
 	float:left;
-	text-indent: 5px;
-	cursor:move;
+	padding: 5px;
+	width:30%;
+	height: 100%;
+	text-align: center;
+	background:#efefef;
 }
 
 .activityNameBox{
 
-	float:right;
+	float:left;
 	color: #FFF;
 	width:70%;
 	height:100%;
 	text-indent: 10px;
-	border-width:1px;
- 	border-style:solid;
-  	border-color:#404040;
   	cursor:move;
-  	position: relative
+  	position: relative;
+  	padding:5px;
 }
 
 .activityCloseBox {
@@ -276,13 +274,14 @@ h1
 ul
 {
 	list-style:none;
+  	margin-left:0;
+  	padding-left:0;
 }
 
 ul#parkedActivityList
 {
 	margin-top: 10px;
 	height: 440px;
-	overflow: auto;
   	border-width:1px;
  	border-style:dashed;
   	border-color:#6E6E6E;
@@ -290,10 +289,25 @@ ul#parkedActivityList
 
 li
 {
+	margin-left:none;
 	list-style:none;
+	border-top:thin solid #fff;
+	border-left:thin solid white;
+	border-right:thin solid white;
+}
+
+li:first-child
+{
+
+}
+
+li:last-child
+{
+	
 }
 
 #midrow
 {
 	border-top: 5px solid #ccc;
+	margin-bottom:20px;
 }
