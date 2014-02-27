@@ -183,13 +183,20 @@ h1
 	padding-left: 10px;
 }
 
-.activityContainer{
+.activityContainer
+{
 	width:100%;
 	height:30px;
 	float:left;
 	font-size:12px;
 	cursor: move;
 }
+
+.activityContainer:hover
+{
+	
+}
+
 .activityDurationBox{
 	float:left;
 	padding: 6px;
@@ -197,6 +204,7 @@ h1
 	height: 100%;
 	text-align: center;
 	background:#efefef;
+	border-right: 1px white solid;
 }
 
 .activityNameBox{

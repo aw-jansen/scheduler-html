@@ -1,7 +1,7 @@
 var DayView = function (container,model,day) 
 {
 	var dayTitle = $("<h4>");
-	var dayStartBox= $("<div>");
+	var dayStartBox= $("<div class='dayStartBox'>");
 	var dayStart = $("<input type='time' class='inputStartTime'>");
 		dayStart.attr('value',day.getStart());
 		dayStart.attr('id',i);
