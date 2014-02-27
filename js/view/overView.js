@@ -57,7 +57,7 @@ var OverView = function (container,model) {
 
 			
 			$(parkedActivityContainer).click(function(){
-				window.stage(activity);
+				window.stage(model.parkedActivities[$(this).attr('position')]);
 			});
 			
 
@@ -159,7 +159,7 @@ var OverView = function (container,model) {
 				arr = strDate.split(':');
 				hour = parseInt(arr[0]);
 				min = parseInt(arr[1]);
-				day[$(this).attr('id')].setStart(hour,min);
+				model.days[$(this).attr('id')].setStart(hour,min);
 			}); 
 
 			var activityBox = $("<ul class='activityBox'>");
@@ -171,22 +171,23 @@ var OverView = function (container,model) {
 			// Loops through all activities in each day
 			for(j=0; j<day._activities.length; j++)
 			{
-				var activity = day._activities[j];
+				var act = day._activities[j];
 
 				var activityContainer = $("<li class='activityContainer'>");
 				var activityDurationbox = $("<div class='activityDurationBox'>");
 				var activityNamebox = $("<div class='activityNameBox'>");
 
-				switch(activity.getType())
+				switch(act.getType())
 		   		{
 			   		case "Presentation"	:activityNamebox.addClass('presentation');break;
 		   			case "Group Work"	:activityNamebox.addClass('groupwork');break;
 		   			case "Discussion"	:activityNamebox.addClass('discussion');break;
 		   			case "Break"		:activityNamebox.addClass('break');break;
 				}
-				activityNamebox.append(activity.getName());
+
+				activityNamebox.append(act.getName());
 				
-				timeCounter = timeCounter + activity.getLength();
+				timeCounter = timeCounter + act.getLength();
 				var h = ("0"+Math.floor(timeCounter/60)).slice(-2);
 				var m = ("0"+Math.floor(timeCounter % 60)).slice(-2);
 				var usableTime = h+":"+m;
@@ -200,7 +201,8 @@ var OverView = function (container,model) {
 				activityBox.append(activityContainer);	
 
 				$(activityContainer).click(function(){
-					window.stage(activity);
+					a = model.days[$(this).attr('day')]._activities[$(this).attr('position')];
+					window.stage(a);
 				});
 			}
 

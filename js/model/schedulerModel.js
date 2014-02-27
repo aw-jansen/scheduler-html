@@ -181,15 +181,13 @@ function Model(){
 		this.notifyObservers();
 	}
 	
-	// add an activity to parked activities
+	// add an activity to parked activities: Changed this to also sort when
+	// a position is provided
 	this.addParkedActivity = function(activity,position)
 	{
-		if(position != null)
-		{
+		if(position != null){
 			this.parkedActivities.splice(position,0,activity);
-		} 
-		else 
-		{
+		} else {
 			this.parkedActivities.push(activity);
 		}
 		this.notifyObservers();
@@ -204,7 +202,9 @@ function Model(){
 	// moves activity between the days, or day and parked activities.
 	// to park activity you need to set the new day to null
 	// to move a parked activity to let's say day 0 you set oldday to null
-	// and new day to 0
+	// and new day to 0. Also added the option where both oldday and newday
+	// are null that will sort a parked activity. Two else's were missing
+	// and have also been added.
 	this.moveActivity = function(oldday, oldposition, newday, newposition) {
 		if(oldday !== null && oldday == newday) {
 			this.days[oldday]._moveActivity(oldposition,newposition);
@@ -241,26 +241,11 @@ function Model(){
 	//*** END OBSERVABLE PATTERN ***
 }
 
-// Creating the actual model
+/****************************************
+Creating the actual model and making it 
+global so the supercontroller can access 
+it
+*****************************************/
 
 var model = new Model();
-
-$(function()
-{
-	//Hiding the windows on start and only showing the landing page
-	$("#inputFormView").hide();
-	$("#overView").show();
-
-	//The global variable so we can access it from other controller and views
-	window.stage = function(activity)
-	{
-		$("#inputFormView").toggle();
-		inputFormView.updateFields(activity);
-	}
-	// Code binding the model to the rest of the controllers and views
-   	var overView = new OverView($("#overView"),model);
-   	var overViewController = new OverViewController(overView,model);
-
-   	var inputFormView = new InputFormView($("#inputFormView"),model);
-   	var inputFormViewController = new InputFormViewController(inputFormView,model);
-});
+window.model = model;
