@@ -45,8 +45,9 @@ h1
 #leftbox, #rightbox
 {
 	background:#fff;
-	height: 535px;
+	min-height: 535px;
 }
+
 #rightbox
 {
 	overflow-x: scroll;
@@ -141,7 +142,7 @@ h1
 
 .dayContainer{
 	width:250px;
-	height:500px;
+	min-height:500px;
 	padding-top: 5px;
 	padding-left:5px;
 	padding-right: 5px;
@@ -295,9 +296,10 @@ ul
 ul#parkedActivityList
 {
 	margin-top: 10px;
-	height: 440px;
+	min-height: 440px;
   	border-width:1px;
  	border:thin solid #ccc;
+ 	overflow-y: auto;
 }
 
 li
