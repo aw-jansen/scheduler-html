@@ -1,13 +1,18 @@
 var ParkedActivityListController = function (view,model) {
 
 	view.sortable({
-
+		appendTo: document.body,
+		helper: "clone",
 		items: "li:not(.placeholder)",
 		connectWith: "ul",
 		cancel: ".activityCloseBox",
 		sort: function() 
 		{
-		$( this ).removeClass( "ui-state-default" );
+			$( this ).removeClass( "ui-state-default" );
+		},
+		start: function()
+		{
+			$(this).find('.activityCloseBox').css('opacity','0');
 		},
 		update:function(event,ui)
 		{

@@ -150,6 +150,11 @@ h1
 	float:left;
 }
 
+.dayContainer .activityBox
+{
+	margin-top: 20px;
+}
+
 .dayContainer h4
 {
 	padding-bottom: 11px;
@@ -169,7 +174,7 @@ h1
 {
 	width:auto;
 	position:relative;
-	height: 535px;
+	min-height: 535px;
 	float:left;
 }
 
@@ -258,7 +263,7 @@ h1
 .activityBox{
 	float:left;
 	width:100%;
-  	height: 382px;
+  	min-height: 382px;
   	overflow: auto;
   	border:thin solid #ccc;
 }
@@ -343,12 +348,10 @@ li:last-child
 
 .dayTimeBox
 {
-	margin-bottom: 15px;
-	float: left;
-	margin-top: 5px;
 	text-align: center;
-	width: 100%;
+	width: 175px;
 	position: relative;
+	margin:auto;
 }
 
 .dayStartBox
@@ -361,4 +364,32 @@ li:last-child
 	margin-left: 10px;
 	float: left;
 	margin-top: 3px;
+}
+
+@media (max-width: 768px){
+	#leftbox,#rightbox,ul#parkedActivityList,.activityBox,.dayContainer,.dayOverview
+	{
+		min-height:100px !important;
+	}
+	#addDayButtonContainer, .dayContainer
+	{
+		margin-top:10px;
+	}
+}
+
+@media (max-width: 992px) {
+
+	#leftbox,#rightbox,ul#parkedActivityList,.activityBox,.dayContainer,.dayOverview
+	{
+		min-height:100px !important;
+	}
+	#addDayButtonContainer
+	{
+		margin-top: 112px;
+	}
+	#addDayButton
+	{
+		margin-top: 34px;
+	}
+
 }

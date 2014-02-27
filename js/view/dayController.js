@@ -5,14 +5,20 @@ var DayController = function(view, model)
 
 	******************************/
 	view.activityBox.sortable({
-      items: "li:not(.placeholder)",
-      connectWith: "ul",
-      sort: function() 
-      {
-        $( this ).removeClass( "ui-state-default" );
-      },
-      update:function(event,ui)
-      {
+		appendTo: document.body,
+		helper: "clone",
+		items: "li:not(.placeholder)",
+		connectWith: "ul",
+		sort: function() 
+		{
+			$( this ).removeClass( "ui-state-default" );
+		},
+		start: function()
+		{
+			$(this).find('.activityCloseBox').css('opacity','0');
+		},
+		update:function(event,ui)
+		{
 		if (this === ui.item.parent()[0]) 
 		{
 			if(ui.item.attr('day')!= null)
@@ -28,6 +34,6 @@ var DayController = function(view, model)
 		{
 
 		}
-      },
+		},
     }).disableSelection();
 }
