@@ -152,13 +152,14 @@ h1
 
 .dayContainer .activityBox
 {
-	margin-top: 20px;
+	
 }
 
 .dayContainer h4
 {
 	padding-bottom: 11px;
 	border-bottom:thin solid #ccc;
+	text-align: center;
 }
 .ui-state-default
 {
@@ -348,10 +349,11 @@ li:last-child
 
 .dayTimeBox
 {
-	text-align: center;
-	width: 175px;
+	padding-bottom: 15px;
+	float: left;
 	position: relative;
-	margin:auto;
+	margin: auto;
+	padding-top: 5px;
 }
 
 .dayStartBox
@@ -361,7 +363,7 @@ li:last-child
 
 .dayEnd
 {
-	margin-left: 10px;
+	margin-left: 5px;
 	float: left;
 	margin-top: 3px;
 }

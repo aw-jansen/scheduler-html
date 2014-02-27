@@ -22,7 +22,7 @@ var DayView = function (container,model,day)
 	hour = parseInt(arr[0]);
 	min = parseInt(arr[1]);
 
-	dayTitle.html("Day "+(daynumber));
+	dayTitle.html("DAY "+(daynumber));
 	dayStartBox.html("From ");
 	dayStartBox.append(dayStart);
 
