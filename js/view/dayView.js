@@ -2,11 +2,12 @@ var DayView = function (container,model,day)
 {
 	var dayTitle = $("<h4>");
 	var dayStartBox= $("<div class='dayStartBox'>");
+	var dayTimeBox = $("<div class='dayTimeBox'>");
 	var dayStart = $("<input type='time' class='inputStartTime'>");
 		dayStart.attr('value',day.getStart());
 		dayStart.attr('id',i);
-	var dayEnd = $("<p>");
-	var dayLength = $("<p>");
+	var dayEnd = $("<div class='dayEnd'>");
+	var dayLength = $("<div>");
 	var daynumber = i;
 	var timeCounter = 0;
 	var usableTime;
@@ -22,9 +23,10 @@ var DayView = function (container,model,day)
 	min = parseInt(arr[1]);
 
 	dayTitle.html("Day "+(daynumber));
-	dayStartBox.html("Start time ");
+	dayStartBox.html("From ");
 	dayStartBox.append(dayStart);
-	dayEnd.html("Day end: "+day.getEnd());
+
+	dayEnd.html("to "+day.getEnd());
 	dayLength.html("Total Length: "+day.getTotalLength()+" min");
 
 	$(dayStart).change(function() 
@@ -59,11 +61,12 @@ var DayView = function (container,model,day)
 	/*****************************************  
   			Append items to container  
 	*****************************************/
+	dayTimeBox.append(dayStartBox);
+	dayTimeBox.append(dayEnd);
 
 	container.append(dayTitle);
-	container.append(dayStartBox);
-	container.append(dayEnd);
-	container.append(dayLength);
+	container.append(dayTimeBox);
+	//container.append(dayLength);
 	container.append(activityBox);
 
     this.activityBox = activityBox;
