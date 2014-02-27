@@ -17,7 +17,6 @@ body
 
 h1
 {
-	
 	font-family:gabriela,Helvetica,Arial,sans-serif;
 }
 
@@ -188,10 +187,12 @@ h1
 	width:100%;
 	height:30px;
 	float:left;
+	font-size:12px;
+	cursor: move;
 }
 .activityDurationBox{
 	float:left;
-	padding: 5px;
+	padding: 6px;
 	width:30%;
 	height: 100%;
 	text-align: center;
@@ -207,17 +208,19 @@ h1
 	text-indent: 10px;
   	cursor:move;
   	position: relative;
-  	padding:5px;
+  	padding:6px;
 }
 
 .activityCloseBox {
     opacity: 0;
     color: #961111;
-    float:right;
+	float: right;
 	cursor: pointer;
 	margin-top: -2px;
 	margin-right: 1px;
-
+	position: absolute;
+	right: 6px;
+	top: 6px;
 }
 
 .activityNameBox:hover .activityCloseBox {
@@ -310,4 +313,18 @@ li:last-child
 {
 	border-top: 5px solid #ccc;
 	margin-bottom:20px;
+}
+
+#activitiesCounter
+{
+	font-size:14px;
+	color:#fff;
+	width: 28px;
+	height: 28px;
+	padding-top:4px;
+	text-align: center;
+	background-color: #d2322d;
+	border-radius:25px;
+	margin:auto;
+	margin-top:-4px;
 }

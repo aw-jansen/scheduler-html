@@ -16,7 +16,7 @@ var OverView = function (container,model) {
 	var parkedActivityList = $("<ul id='parkedActivityList'>");
 	var addActivityButton = $("<button class='btn btn-success' style='width:100%; margin-top:10px;'>");
 	var addActivityButtonContainer = $("<div id='addActivityButton'>");
-	var numberOfParkedActivities = $("<p>");
+	var numberOfParkedActivities = $("<div id='activitiesCounter'>");
 	var numberOfParkedActivitiesContainer = $("<div>");
 
 	/****************************************************
@@ -42,7 +42,7 @@ var OverView = function (container,model) {
 		}
 
 		var parkedActivityListController = new ParkedActivityListController(parkedActivityList,model);
-		numberOfParkedActivities.html("Number of parked activities: "+model.parkedActivities.length);
+		numberOfParkedActivities.html(model.parkedActivities.length);
 	}
 
 	/*****************************************  
@@ -132,12 +132,12 @@ var OverView = function (container,model) {
 
 	function createTestData()
 	{
-		model.addParkedActivity(new Activity("1",10,0,"1"));
-		model.addParkedActivity(new Activity("2",10,0,"2"));
-		model.addParkedActivity(new Activity("3",10,0,"3"));
-		model.addParkedActivity(new Activity("4",10,0,"4"));
-		model.addParkedActivity(new Activity("5",10,0,"5"));
-		model.addParkedActivity(new Activity("6",10,0,"6"));
+		model.addParkedActivity(new Activity("Project Presentation",10,0,"Some description"));
+		model.addParkedActivity(new Activity("Interaction Programming",10,1,"Some description"));
+		model.addParkedActivity(new Activity("Discussing Politics",10,2,"Some description"));
+		model.addParkedActivity(new Activity("Lunch with a stranger",10,3,"Some description"));
+		model.addParkedActivity(new Activity("Visualisation Groupwork",10,1,"Some description"));
+		model.addParkedActivity(new Activity("Creating Vis Presentation",10,0,"Some description"));
 	}
 	
 }
