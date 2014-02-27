@@ -5,21 +5,29 @@
 
 header
 {
-	padding-top:30px;
+	padding-top:0px;
 	padding-bottom:20px;
 	background-color:rgba(255,255,255,0.8);
-	border-bottom:dotted thin #ccc;
 }
 
 body
 {
-	background:url(images/background.jpg) no-repeat;
+	background-image:url(http://subtlepatterns.com/patterns/wood_pattern.png)
 }
 
 h1
 {
 	
 	font-family:gabriela,Helvetica,Arial,sans-serif;
+}
+
+.wrapper
+{
+	border-top:4px solid #5bc0de;
+	width:100%;
+	background:#fff;
+	margin-bottom:20px;
+	border-bottom:thin solid #efefef;
 }
 
 #landingView .row
@@ -38,13 +46,12 @@ h1
 #leftbox, #rightbox
 {
 	background:#fff;
-	min-height:525px;
-	min-width:50px;
-	max-height: 600px;
+	height: 535px;
 }
 #rightbox
 {
-	
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
 #inputFormBox
 {
@@ -68,7 +75,7 @@ h1
 
 #rightbox
 {
-	background:rgba(250,245,240,1);
+	background:#fff;
 }
 
 #middlebox
@@ -127,6 +134,12 @@ h1
 	float:left;
 }
 
+.dayOverviewContainer
+{
+	position: relative;
+	display: block;
+}
+
 .dayContainer{
 	width:250px;
 	height:500px;
@@ -134,12 +147,7 @@ h1
 	padding-left:5px;
 	padding-right: 5px;
 	margin-top:10px;
-	margin-right: 10px;
 	float:left;
-	border-width:2px;
- 	border-style:solid;
-  	border-color:#B3B0AF;
-  	box-shadow: 0px 30px 40px -25px rgba(0, 0, 0, 0.25);
 }
 
 .ui-state-default
@@ -154,7 +162,10 @@ h1
 
 .dayOverview
 {
-	width:100%;
+	width:auto;
+	position:relative;
+	height: 535px;
+	float:left;
 }
 
 #greyout
@@ -166,11 +177,6 @@ h1
 	height:100%;
 	background:rgba(1,1,1,0.4);
 	z-index: 1
-}
-.row{
-	width:100%;
-	float:left;
-	padding-top: 10px;
 }
 
 .buttonContainer{
@@ -220,10 +226,19 @@ h1
     opacity: 1;
 }
 
-.addDayButtonContainer{
+#addDayButtonContainer{
+	width:240px;
+	margin-left:5px;
 	float:left;
-	margin-top:30%;
-	margin-left: 20px
+	margin-top: 140px;
+	background:rgba(1,1,1,0.05);
+	border:thin dashed #ccc;
+}
+
+#addDayButton
+{
+	margin-top: 150px;
+	margin-left:80px;
 }
 .activityBox{
 	float:left;
@@ -266,7 +281,7 @@ ul
 ul#parkedActivityList
 {
 	margin-top: 10px;
-	height: 355px;
+	height: 440px;
 	overflow: auto;
   	border-width:1px;
  	border-style:dashed;
@@ -276,4 +291,9 @@ ul#parkedActivityList
 li
 {
 	list-style:none;
+}
+
+#midrow
+{
+	border-top: 5px solid #ccc;
 }

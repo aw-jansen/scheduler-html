@@ -195,8 +195,13 @@ function Model(){
 	
 	// remove an activity on provided position from parked activites 
 	this.removeParkedActivity = function(position) {
-		return this.parkedActivities.splice(position,1)[0];
+		act = this.parkedActivities.splice(position,1)[0];
 		this.notifyObservers();
+		return act;
+		// this.notifyObservers(); 
+		// notifyobservers was not working here because the function
+		// returned before the notify was called. Fixed it by splitting
+		// and returning individually.
 	};
 	
 	// moves activity between the days, or day and parked activities.
@@ -246,6 +251,6 @@ Creating the actual model and making it
 global so the supercontroller can access 
 it
 *****************************************/
-
 var model = new Model();
+
 window.model = model;
