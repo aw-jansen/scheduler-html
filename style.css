@@ -141,12 +141,12 @@ h1
 }
 
 .dayContainer{
-	width:250px;
-	min-height:500px;
+	width: 250px;
+	min-height: 500px;
 	padding-top: 5px;
-	padding-left:5px;
-	padding-right: 5px;
-	margin-top:10px;
+	padding-left: 0px;
+	padding-right: 10px;
+	margin-top: 10px;
 	float:left;
 }
 
@@ -249,7 +249,6 @@ h1
 
 #addDayButtonContainer{
 	width:240px;
-	margin-left:5px;
 	float:left;
 	margin-top: 112px;
 	background:rgba(1,1,1,0.05);

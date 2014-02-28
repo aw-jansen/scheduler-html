@@ -132,12 +132,12 @@ var OverView = function (container,model) {
 
 	function createTestData()
 	{
-		model.addParkedActivity(new Activity("Project Presentation",10,0,"Some description"));
-		model.addParkedActivity(new Activity("Interaction Programming",10,1,"Some description"));
-		model.addParkedActivity(new Activity("Discussing Politics",10,2,"Some description"));
-		model.addParkedActivity(new Activity("Lunch with a stranger",10,3,"Some description"));
-		model.addParkedActivity(new Activity("Visualisation Groupwork",10,1,"Some description"));
-		model.addParkedActivity(new Activity("Creating Vis Presentation",10,0,"Some description"));
+		model.addParkedActivity(new Activity("Project Presentation",30,0,"Some description"));
+		model.addParkedActivity(new Activity("Interaction Programming",120,1,"Some description"));
+		model.addParkedActivity(new Activity("Discussing Politics",50,2,"Some description"));
+		model.addParkedActivity(new Activity("Lunch with a stranger",45,3,"Some description"));
+		model.addParkedActivity(new Activity("Visualisation Groupwork",120,1,"Some description"));
+		model.addParkedActivity(new Activity("Creating Vis Presentation",60,0,"Some description"));
 	}
 	
 }
