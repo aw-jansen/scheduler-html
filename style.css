@@ -271,6 +271,7 @@ h1
 	width:100%;
 }
 
+
 .presentation
 {
 	background:#EFC94C;
@@ -289,6 +290,42 @@ h1
 .break
 {
 	background:#45B29D
+}
+
+.typeDivision
+{
+	float:left;
+	width:100%;
+	color: #FFF;
+	text-align: center;
+}
+.presentationBar
+{	
+	float:left;
+	background:#EFC94C;
+}
+
+.groupworkBar
+{	
+	float:left;
+	background:#E27A3F
+}
+
+.discussionBar
+{
+	float:left;
+	background:#DF5A49
+}
+
+.brakeBar
+{
+	float:left;
+	background:#45B29D
+}
+
+.warningBrakeBar
+{
+	color:black;
 }
 
 ul
