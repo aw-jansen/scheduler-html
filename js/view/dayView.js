@@ -81,38 +81,39 @@ var DayView = function (container,model,day)
 		}
 	}
 
-	presentationTimePer = parseInt((presentationTime/day.getTotalLength())*100);
-	groupworkTimePer = parseInt((groupworkTime/day.getTotalLength())*100);
-	discussionTimePer = parseInt((discussionTime/day.getTotalLength())*100);
-	brakeTimePer = parseInt((brakeTime/day.getTotalLength())*100);
+	presentationTimePer = parseFloat((presentationTime/day.getTotalLength())*100);
+	groupworkTimePer = parseFloat((groupworkTime/day.getTotalLength())*100);
+	discussionTimePer = parseFloat((discussionTime/day.getTotalLength())*100);
+	brakeTimePer = parseFloat((brakeTime/day.getTotalLength())*100);
 
 	presentationBar.attr("style", "width:"+presentationTimePer+"%");
 	groupworkBar.attr("style", "width:"+groupworkTimePer+"%");
 	discussionBar.attr("style", "width:"+discussionTimePer+"%");
 
 	if(presentationTimePer>0){
-		presentationBar.html(presentationTimePer+"%");	
+		presentationBar.html(parseInt(presentationTimePer)+"%");	
 	};
 	if(groupworkTimePer>0){
-		groupworkBar.html(groupworkTimePer+"%");
+		groupworkBar.html(parseInt(groupworkTimePer)+"%");
 	};
 	if(discussionTimePer>0){
-		discussionBar.html(discussionTimePer+"%");
+		discussionBar.html(parseInt(discussionTimePer)+"%");
 	};
 	if(brakeTimePer>0){
-		brakeBar.html(brakeTimePer+"%");
+		//to avoid not adding up to 100 due to rounding:
+		brakeBar.html((100-parseInt(discussionTimePer)-parseInt(groupworkTimePer)-parseInt(presentationTimePer))+"%");
 	};
 
-			if(brakeTimePer<30)
-		{
-			brakeBar.attr("style", "color:#C40000;width:"+brakeTimePer+"%");
-			warningBrakeBar.html("Too little brake time!");
-		}
-		else
-		{
-			brakeBar.attr("style", "color:#0C7308;width:"+brakeTimePer+"%");
-			warningBrakeBar.html("Enough Brake Time!");
-		}
+	if(brakeTimePer<30)
+	{
+		brakeBar.attr("style", "color:#C40000;width:"+brakeTimePer+"%");
+		warningBrakeBar.html("Too little brake time!");
+	}
+	else
+	{
+		brakeBar.attr("style", "color:#0C7308;width:"+brakeTimePer+"%");
+		warningBrakeBar.html("Enough Brake Time!");
+	}
 
 	/*****************************************  
   			Append items to container  
