@@ -1,5 +1,16 @@
 var DayController = function(view, model) 
 {
+	// update the daystart variable
+
+	$(view.dayStart).change(function() 
+	{ 
+		strDate =  $(this).val();
+		arr = strDate.split(':');
+		hour = parseInt(arr[0]);
+		min = parseInt(arr[1]);
+		model.days[$(this).attr('id')].setStart(hour,min);
+	}); 
+
 	/******************************
 		Drag & Drop Interaction
 

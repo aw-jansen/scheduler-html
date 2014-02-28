@@ -333,6 +333,7 @@ ul
 	list-style:none;
   	margin-left:0;
   	padding-left:0;
+  	margin-bottom: 0px;
 }
 
 ul#parkedActivityList
@@ -380,7 +381,7 @@ li:last-child
 	background-color: #d2322d;
 	border-radius:25px;
 	margin:auto;
-	margin-top:-4px;
+	margin-top:5px;
 }
 
 .dayTimeBox

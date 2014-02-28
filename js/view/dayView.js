@@ -45,15 +45,6 @@ var DayView = function (container,model,day)
 	dayEnd.html("to "+day.getEnd());
 	dayLength.html("Total Length: "+day.getTotalLength()+" min");
 
-	$(dayStart).change(function() 
-	{ 
-		strDate =  $(this).val();
-		arr = strDate.split(':');
-		hour = parseInt(arr[0]);
-		min = parseInt(arr[1]);
-		model.days[$(this).attr('id')].setStart(hour,min);
-	}); 
-
 	var activityBox = $("<ul class='activityBox'>");
 	activityBox.empty();
 	activityBox.attr('id',i);
@@ -65,7 +56,11 @@ var DayView = function (container,model,day)
 	{
 		var act = day._activities[j];
 		var activityContainer = $("<li class='activityContainer'>");
-		timeCounter = timeCounter + act.getLength();
+		
+		if(j>0)
+		{
+			timeCounter = timeCounter + act.getLength();
+		}
 
 		var activityView = new ActivityView(activityContainer,model,act,timeCounter);
 		var activityController = new ActivityController(activityView,model,act);
@@ -107,12 +102,12 @@ var DayView = function (container,model,day)
 	if(brakeTimePer<30)
 	{
 		brakeBar.attr("style", "color:#C40000;width:"+brakeTimePer+"%");
-		warningBrakeBar.html("Too little brake time!");
+		warningBrakeBar.html("Not enough breaks!");
 	}
 	else
 	{
 		brakeBar.attr("style", "color:#0C7308;width:"+brakeTimePer+"%");
-		warningBrakeBar.html("Enough Brake Time!");
+		warningBrakeBar.html("");
 	}
 
 	/*****************************************  
@@ -135,6 +130,6 @@ var DayView = function (container,model,day)
 	container.append(typeDivision)
 
     this.activityBox = activityBox;
-
+    this.dayStart = dayStart;
 
 }
