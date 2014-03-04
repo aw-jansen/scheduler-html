@@ -96,7 +96,7 @@ var DayView = function (container,model,day)
 	};
 	if(brakeTimePer>0){
 		//to avoid not adding up to 100 due to rounding:
-		brakeBar.html((100-parseInt(discussionTimePer)-parseInt(groupworkTimePer)-parseInt(presentationTimePer))+"%");
+		brakeBar.html(parseInt(brakeTimePer)+"%");
 	};
 
 	if(brakeTimePer<30)
