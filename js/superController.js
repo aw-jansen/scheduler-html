@@ -5,10 +5,10 @@ $(function()
 	$("#overView").show();
 
 	//The global variable so we can access it from other controller and views
-	window.stage = function(activity)
+	window.stage = function(act)
 	{
 		$("#inputFormView").toggle();
-		inputFormView.updateFields(activity);
+		inputFormView.updateFields(act);
 	}
 	// Code binding the model to the rest of the controllers and views
    	var overView = new OverView($("#overView"),window.model);

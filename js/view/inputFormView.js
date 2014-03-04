@@ -43,19 +43,20 @@ var InputFormView = function (container,model) {
 	form.append(acitivityTypeDropDownContainer);
 	form.append(descriptionInputContainer);
 
-	function updateFields(activity)
+	function updateFields(act)
 	{
-		if(activity != null)
+		if(act != null)
 		{
-			this.currentActivity = activity;
-			h3.html('Edit '+activity.getName());
-			$(titleInput).val(activity.getName());
-			$(timeInput).val(activity.getLength());
-			$(acitivityTypeDropDown).val(activity.getTypeId());
-			$(descriptionInput).val(activity.getDescription());
+			this.currentActivity = act;
+			h3.html('Edit '+act.getName());
+			$(titleInput).val(act.getName());
+			$(timeInput).val(act.getLength());
+			$(acitivityTypeDropDown).val(act.getTypeId());
+			$(descriptionInput).val(act.getDescription());
 		}
 		else
 		{
+			this.currentActivity = null;
 			h3.html('Create New Activity');
 			$(titleInput).val("");
 			$(timeInput).val("");
