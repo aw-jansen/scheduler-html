@@ -102,7 +102,7 @@ var DayView = function (container,model,day)
 	if(brakeTimePer<30)
 	{
 		brakeBar.attr("style", "color:#C40000;width:"+brakeTimePer+"%");
-		warningBrakeBar.html("Not enough breaks!");
+		warningBrakeBar.html("Your breaks should be 30%!");
 	}
 	else
 	{

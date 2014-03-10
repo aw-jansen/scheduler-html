@@ -140,42 +140,18 @@
 			}
 		},
 		{
+			"file": "js/view/inputFormView.js",
+			"settings":
+			{
+				"buffer_size": 3299,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "js/view/dayView.js",
 			"settings":
 			{
-				"buffer_size": 4143,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/controller/dayController.js",
-			"settings":
-			{
-				"buffer_size": 1095,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/view/overView.js",
-			"settings":
-			{
-				"buffer_size": 4609,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/model/schedulerModel.js",
-			"settings":
-			{
-				"buffer_size": 7039,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "style.css",
-			"settings":
-			{
-				"buffer_size": 5133,
+				"buffer_size": 4083,
 				"line_ending": "Windows"
 			}
 		},
@@ -188,10 +164,18 @@
 			}
 		},
 		{
-			"file": "js/controller/parkedActivityListController.js",
+			"file": "js/superController.js",
 			"settings":
 			{
-				"buffer_size": 748,
+				"buffer_size": 690,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/controller/inputFormViewController.js",
+			"settings":
+			{
+				"buffer_size": 926,
 				"line_ending": "Windows"
 			}
 		}
@@ -265,16 +249,17 @@
 	"file_history":
 	[
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/overView.js",
+		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/controller/overViewController.js",
+		"/C/Users/Henri/Documents/GitHub/scheduler-html/style.css",
+		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/model/schedulerModel.js",
+		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/controller/dayController.js",
+		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/dayView.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/controller/inputFormViewController.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/controller/parkedActivityListController.js",
-		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/controller/dayController.js",
-		"/C/Users/Henri/Documents/GitHub/scheduler-html/style.css",
-		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/dayView.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/parkedActivityView.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/activityView.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/activityController.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/dayController.js",
-		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/model/schedulerModel.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/index.html",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/view/inputFormView.js",
 		"/C/Users/Henri/Documents/GitHub/scheduler-html/js/superController.js",
@@ -343,6 +328,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"warningBrakeBar",
+			"inputformview",
 			"notifyob",
 			"getdays",
 			"break",
@@ -468,9 +455,7 @@
 			"total",
 			"menubox",
 			"numberOfGuests",
-			"NumberOfGuests",
-			"numberOfGuests",
-			"searchButton"
+			"NumberOfGuests"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -488,7 +473,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -504,8 +489,8 @@
 						"selection":
 						[
 							[
-								867,
-								867
+								381,
+								381
 							]
 						],
 						"settings":
@@ -516,27 +501,27 @@
 							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 230.0,
+						"translation.y": 20.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/view/dayView.js",
+					"file": "js/view/inputFormView.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4143,
+						"buffer_size": 3299,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1489,
-								1516
+								2014,
+								2014
 							]
 						],
 						"settings":
@@ -548,27 +533,121 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 678.0,
+						"translation.y": 448.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "js/controller/dayController.js",
+					"file": "js/view/dayView.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1095,
+						"buffer_size": 4083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								3486,
+								3486
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1228.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/controller/overViewController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								131,
+								131
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/superController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								311,
+								311
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/controller/inputFormViewController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								683,
+								683
 							]
 						],
 						"settings":
@@ -584,165 +663,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "js/view/overView.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4029,
-								4030
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1523.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/model/schedulerModel.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7039,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								714,
-								722
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5133,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4466,
-								4466
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "js/controller/overViewController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 402,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								156,
-								156
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "js/controller/parkedActivityListController.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 748,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
