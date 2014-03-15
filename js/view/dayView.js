@@ -56,12 +56,6 @@ var DayView = function (container,model,day)
 	{
 		var act = day._activities[j];
 		var activityContainer = $("<li class='activityContainer'>");
-		
-		if(j>0)
-		{
-			timeCounter = timeCounter + act.getLength();
-		}
-
 		var activityView = new ActivityView(activityContainer,model,act,timeCounter);
 		var activityController = new ActivityController(activityView,model,act);
 
@@ -74,6 +68,8 @@ var DayView = function (container,model,day)
 			case "Discussion"	:discussionTime += day._activities[j].getLength();break;
 			case "Break"		:brakeTime += day._activities[j].getLength();break;
 		}
+
+		timeCounter = timeCounter + act.getLength();
 	}
 
 	presentationTimePer = parseFloat((presentationTime/day.getTotalLength())*100);
