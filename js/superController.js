@@ -15,5 +15,5 @@ $(function()
    	var overViewController = new OverViewController(overView,window.model);
 
    	var inputFormView = new InputFormView($("#inputFormView"),window.model);
-   	var inputFormViewController = new InputFormViewController(inputFormView,window.model);
+   	var inputFormController = new InputFormController(inputFormView,window.model);
 });

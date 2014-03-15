@@ -24,10 +24,6 @@ var ParkedActivityView = function (container,model,act) {
    	container.append(parkedActivityDurationbox);
 	container.append(parkedActivityNamebox);
 
-	closeSymbol.click(function() { 
-    	removeID = $(this).attr('value');
-		model.removeParkedActivity(removeID);
-	});
-
 	this.container = container;
+	this.closeSymbol = closeSymbol;
 }
